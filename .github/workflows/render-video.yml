@@ -18,7 +18,7 @@ permissions:
   issues: write
 
 concurrency:
-  group: video-render-${{ github.event_name }}-${{ inputs.production_id || github.event.issue.number }}
+  group: video-render-${{ inputs.production_id || github.event.issue.title }}
   cancel-in-progress: true
 
 jobs:
@@ -175,6 +175,7 @@ jobs:
 
       - name: Report success to render issue
         if: success() && github.event_name == 'issues'
+        continue-on-error: true
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -190,6 +191,7 @@ jobs:
 
       - name: Report failure to render issue
         if: failure() && github.event_name == 'issues'
+        continue-on-error: true
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
