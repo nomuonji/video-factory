@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "renderer": "animation-factory",
+  "default": false,
+  "description": "Specialized pixel-art and character-animation renderer. Support is limited to events verified in the current Animation Factory component catalog.",
+  "patterns": {
+    "VS-T01": {
+      "status": "partial",
+      "component": "ui.caption"
+    },
+    "VS-T04": {
+      "status": "partial",
+      "component": "ui.caption",
+      "note": "Rendered as a caption; typography-specific tsukkomi styling is not native yet."
+    },
+    "VS-I01": {
+      "status": "partial",
+      "component": "ui.essayCard"
+    },
+    "VS-I12": {
+      "status": "partial",
+      "component": "ui.essayCard"
+    },
+    "VS-R01": {
+      "status": "supported",
+      "component": "camera.zoom"
+    },
+    "VS-R08": {
+      "status": "supported",
+      "component": "camera.shake"
+    },
+    "VS-E06": {
+      "status": "supported",
+      "component": "transition.fade"
+    },
+    "VS-B02": {
+      "status": "partial",
+      "component": "ui.caption"
+    },
+    "VS-C05": {
+      "status": "partial",
+      "component": "ui.essayCard"
+    }
+  }
+}
