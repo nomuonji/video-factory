@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "capabilities": [
+    {
+      "id": "narration",
+      "kind": "audio",
+      "description": "Spoken narration generated from script text.",
+      "inputs": [
+        "text",
+        "language",
+        "voice_preferences"
+      ],
+      "outputs": [
+        "audio",
+        "timing"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "subtitle",
+      "kind": "text",
+      "description": "Timed subtitle or word timing track.",
+      "inputs": [
+        "script_or_transcript"
+      ],
+      "outputs": [
+        "timed_text"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "image",
+      "kind": "visual",
+      "description": "Generated or supplied still image.",
+      "inputs": [
+        "visual_brief"
+      ],
+      "outputs": [
+        "image"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "generated-video",
+      "kind": "visual",
+      "description": "Generated motion clip when a renderer component is insufficient.",
+      "inputs": [
+        "visual_brief",
+        "duration"
+      ],
+      "outputs": [
+        "video"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "illustration",
+      "kind": "visual",
+      "description": "Illustration with explicit composition and style.",
+      "inputs": [
+        "visual_brief"
+      ],
+      "outputs": [
+        "image"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "icon",
+      "kind": "visual",
+      "description": "Simple icon or vector symbol.",
+      "inputs": [
+        "concept"
+      ],
+      "outputs": [
+        "vector_or_image"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "diagram",
+      "kind": "visual",
+      "description": "Structured explanatory diagram.",
+      "inputs": [
+        "entities",
+        "relationships"
+      ],
+      "outputs": [
+        "structured_graphic"
+      ],
+      "providerPolicy": "internal_or_pluggable"
+    },
+    {
+      "id": "chart",
+      "kind": "visual",
+      "description": "Chart generated from structured data.",
+      "inputs": [
+        "data",
+        "chart_intent"
+      ],
+      "outputs": [
+        "structured_graphic"
+      ],
+      "providerPolicy": "internal"
+    },
+    {
+      "id": "map",
+      "kind": "visual",
+      "description": "Map or route visualization.",
+      "inputs": [
+        "locations"
+      ],
+      "outputs": [
+        "structured_graphic"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "screen_capture",
+      "kind": "visual",
+      "description": "Screenshot or browser capture of a referenced interface.",
+      "inputs": [
+        "url_or_target"
+      ],
+      "outputs": [
+        "image_or_video"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "document_capture",
+      "kind": "visual",
+      "description": "Rendered excerpt or evidence view from a document.",
+      "inputs": [
+        "document",
+        "range"
+      ],
+      "outputs": [
+        "image"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "character",
+      "kind": "visual",
+      "description": "Reusable character or avatar representation.",
+      "inputs": [
+        "character_spec"
+      ],
+      "outputs": [
+        "character_asset"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "music",
+      "kind": "audio",
+      "description": "Background music bed with provenance.",
+      "inputs": [
+        "mood",
+        "duration"
+      ],
+      "outputs": [
+        "audio"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "sfx",
+      "kind": "audio",
+      "description": "Short sound effect tied to an edit event.",
+      "inputs": [
+        "effect_intent"
+      ],
+      "outputs": [
+        "audio"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "ambient_audio",
+      "kind": "audio",
+      "description": "Room tone or environmental ambience.",
+      "inputs": [
+        "environment",
+        "duration"
+      ],
+      "outputs": [
+        "audio"
+      ],
+      "providerPolicy": "pluggable"
+    },
+    {
+      "id": "code_render",
+      "kind": "visual",
+      "description": "Rendered code, terminal, or syntax-highlighted snippet.",
+      "inputs": [
+        "code",
+        "language"
+      ],
+      "outputs": [
+        "structured_graphic"
+      ],
+      "providerPolicy": "internal"
+    }
+  ]
+}

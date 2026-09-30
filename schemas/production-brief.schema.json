@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProductionBrief",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "goal",
+    "audience",
+    "durationTargetSeconds",
+    "format",
+    "language",
+    "inputMode",
+    "prompt",
+    "styleProfileId",
+    "constraints"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "goal": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "string"
+    },
+    "durationTargetSeconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "format": {
+      "enum": [
+        "landscape",
+        "vertical",
+        "square"
+      ]
+    },
+    "language": {
+      "type": "string"
+    },
+    "inputMode": {
+      "enum": [
+        "generated",
+        "raw",
+        "hybrid"
+      ]
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "styleProfileId": {
+      "type": "string"
+    },
+    "sourceAssets": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

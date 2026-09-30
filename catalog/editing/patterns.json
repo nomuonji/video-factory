@@ -1,0 +1,3785 @@
+{
+  "version": 1,
+  "sourceCatalog": {
+    "name": "YouTube Editing Visual Library Japan",
+    "version": "0.3",
+    "url": "https://youtube-editing-visual-library.ayami.chatgpt.site/",
+    "sourceCount": 92,
+    "note": "Names, categories, and stated purposes are source-derived. Agent triggers, avoidance rules, requirements, density costs, and implementation mappings are Video Factory normalization."
+  },
+  "patterns": [
+    {
+      "id": "VS-T01",
+      "slug": "standard-caption",
+      "nameJa": "標準字幕",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "発話を補助する",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "clarity",
+        "speech_support"
+      ],
+      "triggers": [
+        "spoken_dialogue"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "speech"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "partial",
+        "adapter": "animation-factory",
+        "component": "ui.caption",
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T01"
+    },
+    {
+      "id": "VS-T02",
+      "slug": "speaker-color",
+      "nameJa": "話者カラー",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "話者を識別する",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "speaker_identity",
+        "clarity"
+      ],
+      "triggers": [
+        "multiple_speakers"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "speaker_identity"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T02"
+    },
+    {
+      "id": "VS-T03",
+      "slug": "emotion-color",
+      "nameJa": "感情カラー",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "気持ちの強さを示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "emotion",
+        "emphasis"
+      ],
+      "triggers": [
+        "emotional_shift"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "emotion_signal"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T03"
+    },
+    {
+      "id": "VS-T04",
+      "slug": "tsukkomi",
+      "nameJa": "ツッコミ",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "意外性を短く強調",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "reaction",
+        "surprise",
+        "comedy"
+      ],
+      "triggers": [
+        "punchline",
+        "unexpected_statement"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "emphasis_text"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "partial",
+        "adapter": "animation-factory",
+        "component": "ui.caption",
+        "fallbackPatternIds": [
+          "VS-T11"
+        ]
+      },
+      "sourceRef": "VS-T04"
+    },
+    {
+      "id": "VS-T05",
+      "slug": "inner-voice",
+      "nameJa": "心の声",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "内心を演出として補足",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "context",
+        "comedy"
+      ],
+      "triggers": [
+        "internal_monologue",
+        "unstated_reaction"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "secondary_text"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T05"
+    },
+    {
+      "id": "VS-T06",
+      "slug": "offscreen-speaker",
+      "nameJa": "画面外話者",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "画角外の声を特定",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "speaker_identity",
+        "clarity"
+      ],
+      "triggers": [
+        "offscreen_voice"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "speaker_identity"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T06"
+    },
+    {
+      "id": "VS-T07",
+      "slug": "whisper-caption",
+      "nameJa": "小声・ささやき",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "発話の弱さを示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "emotion",
+        "speech_support"
+      ],
+      "triggers": [
+        "whisper",
+        "quiet_aside"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "speech"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T07"
+    },
+    {
+      "id": "VS-T08",
+      "slug": "shout-caption",
+      "nameJa": "絶叫・大声",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "声量のピークを可視化",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "emotion",
+        "emphasis"
+      ],
+      "triggers": [
+        "shout",
+        "volume_peak"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "speech"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T08"
+    },
+    {
+      "id": "VS-T09",
+      "slug": "mincho-afterglow",
+      "nameJa": "明朝の余韻",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "発話に余韻をつくる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "emotion",
+        "afterglow"
+      ],
+      "triggers": [
+        "reflective_line",
+        "emotional_pause"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "text"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T09"
+    },
+    {
+      "id": "VS-T10",
+      "slug": "annotation",
+      "nameJa": "注釈・補足",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "誤解を防ぐ補足",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "clarity",
+        "qualification"
+      ],
+      "triggers": [
+        "needs_context",
+        "possible_misunderstanding"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "supporting_fact"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T10"
+    },
+    {
+      "id": "VS-T11",
+      "slug": "phrase-emphasis",
+      "nameJa": "語句強調",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "文中の核を目立たせる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "emphasis",
+        "memory"
+      ],
+      "triggers": [
+        "key_phrase",
+        "important_term"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "speech_or_text"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T11"
+    },
+    {
+      "id": "VS-T12",
+      "slug": "bilingual-caption",
+      "nameJa": "二言語字幕",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "原語と訳を対比する",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "translation",
+        "clarity"
+      ],
+      "triggers": [
+        "multilingual_content"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "source_text",
+        "translated_text"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T12"
+    },
+    {
+      "id": "VS-T13",
+      "slug": "word-follow-caption",
+      "nameJa": "逐語・追従字幕",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "現在の発話位置を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "retention",
+        "speech_support"
+      ],
+      "triggers": [
+        "fast_speech",
+        "short_form"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "timed_words"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T13"
+    },
+    {
+      "id": "VS-T14",
+      "slug": "editor-comment",
+      "nameJa": "編集者コメント",
+      "category": "speech-caption",
+      "categoryNameJa": "発話テロップ",
+      "purpose": "編集者の視点を別レイヤーで足す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "commentary",
+        "comedy",
+        "context"
+      ],
+      "triggers": [
+        "editorial_aside",
+        "fact_check_note"
+      ],
+      "avoidWhen": [
+        "text_overload",
+        "dense_visual"
+      ],
+      "requirements": [
+        "secondary_text"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-T14"
+    },
+    {
+      "id": "VS-R01",
+      "slug": "punch-in",
+      "nameJa": "パンチイン",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "表情や重要語へ寄る",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "emphasis",
+        "reaction",
+        "surprise"
+      ],
+      "triggers": [
+        "important_claim",
+        "punchline",
+        "reaction_peak"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "focus_target"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "supported",
+        "adapter": "animation-factory",
+        "component": "camera.zoom",
+        "fallbackPatternIds": [
+          "VS-T11"
+        ]
+      },
+      "sourceRef": "VS-R01"
+    },
+    {
+      "id": "VS-R02",
+      "slug": "extreme-closeup",
+      "nameJa": "超顔アップ",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "表情を画面の主役にする",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "reaction",
+        "emotion"
+      ],
+      "triggers": [
+        "strong_facial_reaction"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "face_or_focus_target"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R02"
+    },
+    {
+      "id": "VS-R03",
+      "slug": "darken-and-zoom",
+      "nameJa": "暗転＋ズーム",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "周辺情報を抑える",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "focus",
+        "dramatic_emphasis"
+      ],
+      "triggers": [
+        "serious_reveal",
+        "single_focus"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "focus_target"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R03"
+    },
+    {
+      "id": "VS-R04",
+      "slug": "freeze",
+      "nameJa": "フリーズ",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "見落としやすい瞬間を止める",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "clarity",
+        "reaction",
+        "analysis"
+      ],
+      "triggers": [
+        "blink_and_miss",
+        "critical_frame"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "time_based_visual"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R04"
+    },
+    {
+      "id": "VS-R05",
+      "slug": "replay",
+      "nameJa": "リプレイ",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "出来事を再確認する",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "clarity",
+        "reaction"
+      ],
+      "triggers": [
+        "important_action",
+        "comedic_moment"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "replayable_segment"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R05"
+    },
+    {
+      "id": "VS-R06",
+      "slug": "focus-lines",
+      "nameJa": "集中線",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "中心へ視線を集める",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "focus",
+        "emphasis"
+      ],
+      "triggers": [
+        "visual_reveal",
+        "central_subject"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "focus_target"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R06"
+    },
+    {
+      "id": "VS-R07",
+      "slug": "slow-motion",
+      "nameJa": "スローモーション",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "動作や表情を読み取らせる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "analysis",
+        "emotion",
+        "emphasis"
+      ],
+      "triggers": [
+        "fast_action",
+        "reaction_peak"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "time_based_visual"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R07"
+    },
+    {
+      "id": "VS-R08",
+      "slug": "screen-shake",
+      "nameJa": "画面シェイク",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "衝撃を画面全体に伝える",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "impact",
+        "surprise"
+      ],
+      "triggers": [
+        "impact_event",
+        "strong_punchline"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "visual_timeline"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "supported",
+        "adapter": "animation-factory",
+        "component": "camera.shake",
+        "fallbackPatternIds": [
+          "VS-R01"
+        ]
+      },
+      "sourceRef": "VS-R08"
+    },
+    {
+      "id": "VS-R09",
+      "slug": "monochrome-disappointment",
+      "nameJa": "モノクロ落胆",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "落胆を簡潔に表す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "emotion",
+        "comedy"
+      ],
+      "triggers": [
+        "disappointment",
+        "failure"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "visual_scene"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R09"
+    },
+    {
+      "id": "VS-R10",
+      "slug": "manga-balloon",
+      "nameJa": "マンガ吹き出し",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "反応を記号化する",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "reaction",
+        "comedy"
+      ],
+      "triggers": [
+        "short_reaction",
+        "character_thought"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "focus_target",
+        "text"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R10"
+    },
+    {
+      "id": "VS-R11",
+      "slug": "reaction-barrage",
+      "nameJa": "リアクション連打",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "同じ反応の累積を見せる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "comedy",
+        "escalation"
+      ],
+      "triggers": [
+        "repeated_reaction",
+        "running_gag"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "repeatable_reaction"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R11"
+    },
+    {
+      "id": "VS-R12",
+      "slug": "cutout-highlight",
+      "nameJa": "対象の切り抜き強調",
+      "category": "reaction-emphasis",
+      "categoryNameJa": "強調・リアクション",
+      "purpose": "物を背景から分離する",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "focus",
+        "product_focus"
+      ],
+      "triggers": [
+        "object_reveal",
+        "specific_object"
+      ],
+      "avoidWhen": [
+        "calm_explanation",
+        "recent_strong_effect"
+      ],
+      "requirements": [
+        "isolatable_subject"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-R12"
+    },
+    {
+      "id": "VS-I01",
+      "slug": "definition-card",
+      "nameJa": "定義カード",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "知らない言葉を理解させる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "explanation",
+        "definition"
+      ],
+      "triggers": [
+        "unknown_term",
+        "first_use_term"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "term",
+        "definition"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "partial",
+        "adapter": "animation-factory",
+        "component": "ui.essayCard",
+        "fallbackPatternIds": [
+          "VS-I13"
+        ]
+      },
+      "sourceRef": "VS-I01"
+    },
+    {
+      "id": "VS-I02",
+      "slug": "two-way-comparison",
+      "nameJa": "二項比較",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "差を同じ軸で比較",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "comparison",
+        "decision_support"
+      ],
+      "triggers": [
+        "two_options",
+        "before_after_claim"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "two_comparable_items"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I02"
+    },
+    {
+      "id": "VS-I03",
+      "slug": "step-diagram",
+      "nameJa": "ステップ図解",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "作業の順番を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "process",
+        "tutorial"
+      ],
+      "triggers": [
+        "ordered_steps",
+        "workflow"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "ordered_items"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I03"
+    },
+    {
+      "id": "VS-I04",
+      "slug": "causal-diagram",
+      "nameJa": "因果・関係図",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "要素の関係を整理",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "explanation",
+        "causality"
+      ],
+      "triggers": [
+        "causal_chain",
+        "system_relationship"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "related_entities"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I04"
+    },
+    {
+      "id": "VS-I05",
+      "slug": "big-number",
+      "nameJa": "数値ドン",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "重要な数値を記憶させる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "data_emphasis",
+        "memory"
+      ],
+      "triggers": [
+        "surprising_number",
+        "key_metric"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "number",
+        "context"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I05"
+    },
+    {
+      "id": "VS-I06",
+      "slug": "bar-chart",
+      "nameJa": "棒グラフ",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "量の差を比較",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "data",
+        "comparison"
+      ],
+      "triggers": [
+        "quantitative_comparison"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "numeric_series"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I06"
+    },
+    {
+      "id": "VS-I07",
+      "slug": "data-table",
+      "nameJa": "データ表",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "複数条件を正確に読ませる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "data",
+        "precision"
+      ],
+      "triggers": [
+        "multi_attribute_comparison"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "tabular_data"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I07"
+    },
+    {
+      "id": "VS-I08",
+      "slug": "timeline",
+      "nameJa": "タイムライン",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "時間の順序を可視化",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "chronology",
+        "explanation"
+      ],
+      "triggers": [
+        "historical_sequence",
+        "milestones"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "dated_or_ordered_events"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I08"
+    },
+    {
+      "id": "VS-I09",
+      "slug": "arrow-callout",
+      "nameJa": "矢印・囲み",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "細部の位置を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "focus",
+        "instruction"
+      ],
+      "triggers": [
+        "small_detail",
+        "where_to_look"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "visual_target"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I09"
+    },
+    {
+      "id": "VS-I10",
+      "slug": "map-route",
+      "nameJa": "地図・ルート",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "場所と移動経路を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "location",
+        "journey"
+      ],
+      "triggers": [
+        "route",
+        "geographic_context"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "locations"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I10"
+    },
+    {
+      "id": "VS-I11",
+      "slug": "ranking",
+      "nameJa": "ランキング",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "順位と比較を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "ranking",
+        "comparison"
+      ],
+      "triggers": [
+        "ordered_choices",
+        "top_list"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "ranked_items"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I11"
+    },
+    {
+      "id": "VS-I12",
+      "slug": "quote-card",
+      "nameJa": "引用カード",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "他者の発言を区別する",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "quotation",
+        "evidence"
+      ],
+      "triggers": [
+        "external_quote",
+        "source_statement"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "quote",
+        "source"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "partial",
+        "adapter": "animation-factory",
+        "component": "ui.essayCard",
+        "fallbackPatternIds": [
+          "VS-I13"
+        ]
+      },
+      "sourceRef": "VS-I12"
+    },
+    {
+      "id": "VS-I13",
+      "slug": "bullet-summary",
+      "nameJa": "箇条書きまとめ",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "複数の要点を整理",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "summary",
+        "clarity"
+      ],
+      "triggers": [
+        "multiple_takeaways",
+        "recap"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "list_items"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I13"
+    },
+    {
+      "id": "VS-I14",
+      "slug": "source-condition",
+      "nameJa": "出典・条件表示",
+      "category": "information-explainer",
+      "categoryNameJa": "情報・解説",
+      "purpose": "数字や主張の範囲を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "evidence",
+        "qualification"
+      ],
+      "triggers": [
+        "factual_claim",
+        "numeric_claim",
+        "scope_limit"
+      ],
+      "avoidWhen": [
+        "already_obvious",
+        "insufficient_read_time"
+      ],
+      "requirements": [
+        "source_or_condition"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-I14"
+    },
+    {
+      "id": "VS-L01",
+      "slug": "wide-talk",
+      "nameJa": "全体引き・対談",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "参加者の関係を見せる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "context",
+        "conversation"
+      ],
+      "triggers": [
+        "multiple_participants"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "multiple_subjects"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L01"
+    },
+    {
+      "id": "VS-L02",
+      "slug": "split-screen",
+      "nameJa": "二分割",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "二者の反応を同時に見せる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "comparison",
+        "reaction"
+      ],
+      "triggers": [
+        "two_simultaneous_subjects"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "two_visual_sources"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L02"
+    },
+    {
+      "id": "VS-L03",
+      "slug": "material-plus-pip",
+      "nameJa": "資料＋PIP",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "資料と話者を同時に出す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "explanation",
+        "presence"
+      ],
+      "triggers": [
+        "document_explanation",
+        "screen_explanation"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "primary_material",
+        "speaker_visual"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L03"
+    },
+    {
+      "id": "VS-L04",
+      "slug": "circle-pip",
+      "nameJa": "丸ワイプ",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "表情を小さく添える",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "reaction",
+        "presence"
+      ],
+      "triggers": [
+        "secondary_face_reaction"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "primary_visual",
+        "face_visual"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L04"
+    },
+    {
+      "id": "VS-L05",
+      "slug": "broll-insert",
+      "nameJa": "B-roll差し込み",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "話題の対象を見せる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "illustration",
+        "context"
+      ],
+      "triggers": [
+        "concrete_object",
+        "place",
+        "process"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "supporting_visual"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L05"
+    },
+    {
+      "id": "VS-L06",
+      "slug": "visual-text-split",
+      "nameJa": "映像＋文字の左右構成",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "説明と対象を整理",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "explanation",
+        "comparison"
+      ],
+      "triggers": [
+        "visual_plus_explanation"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "visual",
+        "supporting_text"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L06"
+    },
+    {
+      "id": "VS-L07",
+      "slug": "three-way-split",
+      "nameJa": "三分割",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "三者・三案を比較",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "comparison"
+      ],
+      "triggers": [
+        "three_options",
+        "three_participants"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "three_visual_sources"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L07"
+    },
+    {
+      "id": "VS-L08",
+      "slug": "vertical-before-after",
+      "nameJa": "上下・ビフォーアフター",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "同じ対象の差を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "before_after",
+        "comparison"
+      ],
+      "triggers": [
+        "before_after"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "before_visual",
+        "after_visual"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L08"
+    },
+    {
+      "id": "VS-L09",
+      "slug": "portrait-background-extension",
+      "nameJa": "縦素材の背景拡張",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "異なる縦横比を収める",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "format_adaptation"
+      ],
+      "triggers": [
+        "aspect_ratio_mismatch"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "portrait_visual"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L09"
+    },
+    {
+      "id": "VS-L10",
+      "slug": "detail-magnifier",
+      "nameJa": "手元・操作の拡大窓",
+      "category": "layout",
+      "categoryNameJa": "レイアウト",
+      "purpose": "細かい操作を読ませる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "instruction",
+        "focus"
+      ],
+      "triggers": [
+        "small_ui_action",
+        "fine_detail"
+      ],
+      "avoidWhen": [
+        "insufficient_visual_sources",
+        "small_screen_overload"
+      ],
+      "requirements": [
+        "detail_visual"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-L10"
+    },
+    {
+      "id": "VS-E01",
+      "slug": "jump-cut",
+      "nameJa": "ジャンプカット",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "不要な間を詰める",
+      "inputModes": [
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "pacing",
+        "compression"
+      ],
+      "triggers": [
+        "dead_air",
+        "redundant_pause"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "editable_timeline"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E01"
+    },
+    {
+      "id": "VS-E02",
+      "slug": "jl-cut",
+      "nameJa": "J・Lカット",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "会話や場面を滑らかにつなぐ",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "continuity",
+        "pacing"
+      ],
+      "triggers": [
+        "scene_change_with_audio"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "adjacent_scenes",
+        "audio_track"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E02"
+    },
+    {
+      "id": "VS-E03",
+      "slug": "montage",
+      "nameJa": "モンタージュ",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "長い過程を短く要約",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "compression",
+        "progress"
+      ],
+      "triggers": [
+        "long_process",
+        "repetitive_process"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "multiple_visual_beats"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E03"
+    },
+    {
+      "id": "VS-E04",
+      "slug": "chapter-card",
+      "nameJa": "章扉",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "話題の区切りを示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "structure",
+        "orientation"
+      ],
+      "triggers": [
+        "chapter_change",
+        "major_topic_shift"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "chapter_title"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E04"
+    },
+    {
+      "id": "VS-E05",
+      "slug": "horizontal-slide",
+      "nameJa": "横スライド",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "方向性を持って遷移",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "transition",
+        "direction"
+      ],
+      "triggers": [
+        "adjacent_related_scenes"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "two_scenes"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E05"
+    },
+    {
+      "id": "VS-E06",
+      "slug": "fade-dissolve",
+      "nameJa": "フェード・ディゾルブ",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "時間経過・余韻を表す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "transition",
+        "afterglow",
+        "time_passage"
+      ],
+      "triggers": [
+        "soft_transition",
+        "time_passage"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "two_scenes"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "supported",
+        "adapter": "animation-factory",
+        "component": "transition.fade",
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E06"
+    },
+    {
+      "id": "VS-E07",
+      "slug": "match-cut",
+      "nameJa": "マッチカット",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "画の共通点で場面を結ぶ",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "transition",
+        "visual_rhyme"
+      ],
+      "triggers": [
+        "similar_shape_or_motion"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "matched_visuals"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E07"
+    },
+    {
+      "id": "VS-E08",
+      "slug": "time-passage-card",
+      "nameJa": "時間経過カード",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "省略した時間を知らせる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "time_passage",
+        "clarity"
+      ],
+      "triggers": [
+        "time_skip"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "elapsed_time_text"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E08"
+    },
+    {
+      "id": "VS-E09",
+      "slug": "hold-the-pause",
+      "nameJa": "間を残す",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "反応を待たせる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "timing",
+        "comedy",
+        "emotion"
+      ],
+      "triggers": [
+        "reaction_wait",
+        "dramatic_pause"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "timeline_space"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E09"
+    },
+    {
+      "id": "VS-E10",
+      "slug": "speed-ramp",
+      "nameJa": "速度ランプ",
+      "category": "pacing-transition",
+      "categoryNameJa": "テンポ・遷移",
+      "purpose": "過程を圧縮し山場を残す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "pacing",
+        "impact"
+      ],
+      "triggers": [
+        "long_motion_with_peak"
+      ],
+      "avoidWhen": [
+        "transition_for_its_own_sake",
+        "recent_transition"
+      ],
+      "requirements": [
+        "time_based_visual"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-E10"
+    },
+    {
+      "id": "VS-A01",
+      "slug": "impact-sfx",
+      "nameJa": "インパクトSE",
+      "category": "audio",
+      "categoryNameJa": "音",
+      "purpose": "強調の瞬間を同期させる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "impact",
+        "emphasis"
+      ],
+      "triggers": [
+        "visual_impact",
+        "punchline"
+      ],
+      "avoidWhen": [
+        "audio_clutter",
+        "conflicting_voiceover"
+      ],
+      "requirements": [
+        "sfx_capability"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-A01"
+    },
+    {
+      "id": "VS-A02",
+      "slug": "pop-notification-sfx",
+      "nameJa": "ポップ・通知SE",
+      "category": "audio",
+      "categoryNameJa": "音",
+      "purpose": "情報の出現を知らせる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "attention",
+        "ui_feedback"
+      ],
+      "triggers": [
+        "card_appearance",
+        "small_reveal"
+      ],
+      "avoidWhen": [
+        "audio_clutter",
+        "conflicting_voiceover"
+      ],
+      "requirements": [
+        "sfx_capability"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-A02"
+    },
+    {
+      "id": "VS-A03",
+      "slug": "silence-bgm-stop",
+      "nameJa": "無音・BGM停止",
+      "category": "audio",
+      "categoryNameJa": "音",
+      "purpose": "違和感や間をつくる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "contrast",
+        "comedy",
+        "tension"
+      ],
+      "triggers": [
+        "awkward_pause",
+        "serious_reveal"
+      ],
+      "avoidWhen": [
+        "audio_clutter",
+        "conflicting_voiceover"
+      ],
+      "requirements": [
+        "audio_mix"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-A03"
+    },
+    {
+      "id": "VS-A04",
+      "slug": "beat-synced-edit",
+      "nameJa": "BGMの拍に合わせる",
+      "category": "audio",
+      "categoryNameJa": "音",
+      "purpose": "編集テンポを揃える",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "rhythm",
+        "pacing"
+      ],
+      "triggers": [
+        "montage",
+        "energetic_sequence"
+      ],
+      "avoidWhen": [
+        "audio_clutter",
+        "conflicting_voiceover"
+      ],
+      "requirements": [
+        "music_with_beats",
+        "editable_timeline"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-A04"
+    },
+    {
+      "id": "VS-A05",
+      "slug": "swish",
+      "nameJa": "スイッシュ",
+      "category": "audio",
+      "categoryNameJa": "音",
+      "purpose": "画面移動を補助する",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "motion_support",
+        "transition"
+      ],
+      "triggers": [
+        "slide",
+        "fast_move"
+      ],
+      "avoidWhen": [
+        "audio_clutter",
+        "conflicting_voiceover"
+      ],
+      "requirements": [
+        "sfx_capability"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-A05"
+    },
+    {
+      "id": "VS-A06",
+      "slug": "correct-wrong-sfx",
+      "nameJa": "正解・不正解音",
+      "category": "audio",
+      "categoryNameJa": "音",
+      "purpose": "判定を耳でも伝える",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "feedback",
+        "game_ui"
+      ],
+      "triggers": [
+        "answer_reveal",
+        "judgement"
+      ],
+      "avoidWhen": [
+        "audio_clutter",
+        "conflicting_voiceover"
+      ],
+      "requirements": [
+        "sfx_capability"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-A06"
+    },
+    {
+      "id": "VS-A07",
+      "slug": "emotion-jingle",
+      "nameJa": "感情・余韻ジングル",
+      "category": "audio",
+      "categoryNameJa": "音",
+      "purpose": "感情の場面を区切る",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "emotion",
+        "structure"
+      ],
+      "triggers": [
+        "emotional_resolution",
+        "segment_end"
+      ],
+      "avoidWhen": [
+        "audio_clutter",
+        "conflicting_voiceover"
+      ],
+      "requirements": [
+        "music_or_jingle"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-A07"
+    },
+    {
+      "id": "VS-A08",
+      "slug": "room-tone",
+      "nameJa": "環境音・ルームトーン",
+      "category": "audio",
+      "categoryNameJa": "音",
+      "purpose": "音の不自然な断絶を避ける",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "continuity",
+        "naturalism"
+      ],
+      "triggers": [
+        "dialogue_edit",
+        "silent_gap"
+      ],
+      "avoidWhen": [
+        "audio_clutter",
+        "conflicting_voiceover"
+      ],
+      "requirements": [
+        "ambient_audio"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-A08"
+    },
+    {
+      "id": "VS-G01",
+      "slug": "rules-card",
+      "nameJa": "ルール説明",
+      "category": "program-ui",
+      "categoryNameJa": "企画進行UI",
+      "purpose": "企画の理解を揃える",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "orientation",
+        "rules"
+      ],
+      "triggers": [
+        "game_or_challenge_start"
+      ],
+      "avoidWhen": [
+        "non_program_context",
+        "ui_overload"
+      ],
+      "requirements": [
+        "rules"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-G01"
+    },
+    {
+      "id": "VS-G02",
+      "slug": "score-display",
+      "nameJa": "スコア表示",
+      "category": "program-ui",
+      "categoryNameJa": "企画進行UI",
+      "purpose": "競争の現在地を見せる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "progress",
+        "competition"
+      ],
+      "triggers": [
+        "score_change",
+        "competition"
+      ],
+      "avoidWhen": [
+        "non_program_context",
+        "ui_overload"
+      ],
+      "requirements": [
+        "score_state"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-G02"
+    },
+    {
+      "id": "VS-G03",
+      "slug": "countdown",
+      "nameJa": "カウントダウン",
+      "category": "program-ui",
+      "categoryNameJa": "企画進行UI",
+      "purpose": "残り時間を見せる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "urgency",
+        "progress"
+      ],
+      "triggers": [
+        "timed_challenge",
+        "deadline"
+      ],
+      "avoidWhen": [
+        "non_program_context",
+        "ui_overload"
+      ],
+      "requirements": [
+        "remaining_time"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-G03"
+    },
+    {
+      "id": "VS-G04",
+      "slug": "question-options",
+      "nameJa": "問題・選択肢",
+      "category": "program-ui",
+      "categoryNameJa": "企画進行UI",
+      "purpose": "考える対象を明示",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "interaction",
+        "quiz"
+      ],
+      "triggers": [
+        "question_prompt"
+      ],
+      "avoidWhen": [
+        "non_program_context",
+        "ui_overload"
+      ],
+      "requirements": [
+        "question",
+        "choices"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-G04"
+    },
+    {
+      "id": "VS-G05",
+      "slug": "result-reveal",
+      "nameJa": "結果発表",
+      "category": "program-ui",
+      "categoryNameJa": "企画進行UI",
+      "purpose": "結末を伝える",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "reveal",
+        "resolution"
+      ],
+      "triggers": [
+        "result_ready",
+        "winner_reveal"
+      ],
+      "avoidWhen": [
+        "non_program_context",
+        "ui_overload"
+      ],
+      "requirements": [
+        "result"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-G05"
+    },
+    {
+      "id": "VS-G06",
+      "slug": "progress-steps",
+      "nameJa": "進捗・ステップ表示",
+      "category": "program-ui",
+      "categoryNameJa": "企画進行UI",
+      "purpose": "長い企画の現在地を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "progress",
+        "orientation"
+      ],
+      "triggers": [
+        "multi_step_activity"
+      ],
+      "avoidWhen": [
+        "non_program_context",
+        "ui_overload"
+      ],
+      "requirements": [
+        "step_state"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-G06"
+    },
+    {
+      "id": "VS-G07",
+      "slug": "mission-goal",
+      "nameJa": "ミッション・目標",
+      "category": "program-ui",
+      "categoryNameJa": "企画進行UI",
+      "purpose": "視聴者とゴールを共有",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "goal",
+        "orientation"
+      ],
+      "triggers": [
+        "challenge_start",
+        "goal_change"
+      ],
+      "avoidWhen": [
+        "non_program_context",
+        "ui_overload"
+      ],
+      "requirements": [
+        "goal_text"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-G07"
+    },
+    {
+      "id": "VS-G08",
+      "slug": "progress-gauge",
+      "nameJa": "ゲージ・達成率",
+      "category": "program-ui",
+      "categoryNameJa": "企画進行UI",
+      "purpose": "進み具合を連続的に示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "progress",
+        "data"
+      ],
+      "triggers": [
+        "continuous_progress"
+      ],
+      "avoidWhen": [
+        "non_program_context",
+        "ui_overload"
+      ],
+      "requirements": [
+        "progress_value"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-G08"
+    },
+    {
+      "id": "VS-B01",
+      "slug": "channel-mark",
+      "nameJa": "チャンネルマーク",
+      "category": "brand-decoration",
+      "categoryNameJa": "ブランド・装飾",
+      "purpose": "発信元を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "branding"
+      ],
+      "triggers": [
+        "brand_presence"
+      ],
+      "avoidWhen": [
+        "content_obscured",
+        "decoration_overload"
+      ],
+      "requirements": [
+        "brand_asset"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-B01"
+    },
+    {
+      "id": "VS-B02",
+      "slug": "topic-header",
+      "nameJa": "番組・話題見出し",
+      "category": "brand-decoration",
+      "categoryNameJa": "ブランド・装飾",
+      "purpose": "現在の話題を示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "orientation",
+        "branding"
+      ],
+      "triggers": [
+        "topic_change",
+        "segment_start"
+      ],
+      "avoidWhen": [
+        "content_obscured",
+        "decoration_overload"
+      ],
+      "requirements": [
+        "topic_text"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "partial",
+        "adapter": "animation-factory",
+        "component": "ui.caption",
+        "fallbackPatternIds": [
+          "VS-E04"
+        ]
+      },
+      "sourceRef": "VS-B02"
+    },
+    {
+      "id": "VS-B03",
+      "slug": "lower-third",
+      "nameJa": "ローワーサード",
+      "category": "brand-decoration",
+      "categoryNameJa": "ブランド・装飾",
+      "purpose": "人物名・役割を紹介",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "identity",
+        "context"
+      ],
+      "triggers": [
+        "person_introduction"
+      ],
+      "avoidWhen": [
+        "content_obscured",
+        "decoration_overload"
+      ],
+      "requirements": [
+        "name",
+        "role"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-B03"
+    },
+    {
+      "id": "VS-B04",
+      "slug": "manga-game-decoration",
+      "nameJa": "マンガ・ゲーム装飾",
+      "category": "brand-decoration",
+      "categoryNameJa": "ブランド・装飾",
+      "purpose": "企画内の演出トーンを変える",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "tone",
+        "branding",
+        "comedy"
+      ],
+      "triggers": [
+        "playful_segment",
+        "game_segment"
+      ],
+      "avoidWhen": [
+        "content_obscured",
+        "decoration_overload"
+      ],
+      "requirements": [
+        "style_assets"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-B04"
+    },
+    {
+      "id": "VS-B05",
+      "slug": "paper-note-texture",
+      "nameJa": "紙メモ・質感ベース",
+      "category": "brand-decoration",
+      "categoryNameJa": "ブランド・装飾",
+      "purpose": "説明を親しみやすく見せる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "tone",
+        "explanation"
+      ],
+      "triggers": [
+        "informal_explanation",
+        "memo"
+      ],
+      "avoidWhen": [
+        "content_obscured",
+        "decoration_overload"
+      ],
+      "requirements": [
+        "text"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-B05"
+    },
+    {
+      "id": "VS-B06",
+      "slug": "frame-letterbox",
+      "nameJa": "画面枠・レターボックス",
+      "category": "brand-decoration",
+      "categoryNameJa": "ブランド・装飾",
+      "purpose": "映像のトーンを区切る",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "tone",
+        "mode_change"
+      ],
+      "triggers": [
+        "flashback",
+        "cinematic_segment"
+      ],
+      "avoidWhen": [
+        "content_obscured",
+        "decoration_overload"
+      ],
+      "requirements": [
+        "visual_scene"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-B06"
+    },
+    {
+      "id": "VS-C01",
+      "slug": "opening-digest",
+      "nameJa": "冒頭ダイジェスト",
+      "category": "retention-cta",
+      "categoryNameJa": "視聴維持・CTA",
+      "purpose": "見る理由を先に示す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "hook",
+        "retention"
+      ],
+      "triggers": [
+        "video_open",
+        "later_highlights_available"
+      ],
+      "avoidWhen": [
+        "interrupts_key_content",
+        "cta_overuse"
+      ],
+      "requirements": [
+        "future_beats"
+      ],
+      "intensity": "high",
+      "densityCost": 3,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-C01"
+    },
+    {
+      "id": "VS-C02",
+      "slug": "question-tease",
+      "nameJa": "疑問・先出し",
+      "category": "retention-cta",
+      "categoryNameJa": "視聴維持・CTA",
+      "purpose": "答えへの関心をつくる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "hook",
+        "curiosity"
+      ],
+      "triggers": [
+        "unresolved_question",
+        "video_open"
+      ],
+      "avoidWhen": [
+        "interrupts_key_content",
+        "cta_overuse"
+      ],
+      "requirements": [
+        "question_or_tease"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-C02"
+    },
+    {
+      "id": "VS-C03",
+      "slug": "subscribe-follow",
+      "nameJa": "登録・フォロー案内",
+      "category": "retention-cta",
+      "categoryNameJa": "視聴維持・CTA",
+      "purpose": "次の接点を案内",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "cta"
+      ],
+      "triggers": [
+        "cta_moment"
+      ],
+      "avoidWhen": [
+        "interrupts_key_content",
+        "cta_overuse"
+      ],
+      "requirements": [
+        "channel_identity"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-C03"
+    },
+    {
+      "id": "VS-C04",
+      "slug": "comment-prompt",
+      "nameJa": "コメント誘導",
+      "category": "retention-cta",
+      "categoryNameJa": "視聴維持・CTA",
+      "purpose": "具体的な参加を促す",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "cta",
+        "interaction"
+      ],
+      "triggers": [
+        "audience_question"
+      ],
+      "avoidWhen": [
+        "interrupts_key_content",
+        "cta_overuse"
+      ],
+      "requirements": [
+        "prompt_text"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-C04"
+    },
+    {
+      "id": "VS-C05",
+      "slug": "key-point-recap",
+      "nameJa": "要点のおさらい",
+      "category": "retention-cta",
+      "categoryNameJa": "視聴維持・CTA",
+      "purpose": "理解を定着させる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "summary",
+        "memory"
+      ],
+      "triggers": [
+        "section_end",
+        "video_end"
+      ],
+      "avoidWhen": [
+        "interrupts_key_content",
+        "cta_overuse"
+      ],
+      "requirements": [
+        "takeaways"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "partial",
+        "adapter": "animation-factory",
+        "component": "ui.essayCard",
+        "fallbackPatternIds": [
+          "VS-I13"
+        ]
+      },
+      "sourceRef": "VS-C05"
+    },
+    {
+      "id": "VS-C06",
+      "slug": "end-screen",
+      "nameJa": "エンド画面",
+      "category": "retention-cta",
+      "categoryNameJa": "視聴維持・CTA",
+      "purpose": "次の動画への導線をつくる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "cta",
+        "navigation"
+      ],
+      "triggers": [
+        "video_end"
+      ],
+      "avoidWhen": [
+        "interrupts_key_content",
+        "cta_overuse"
+      ],
+      "requirements": [
+        "next_content"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-C06"
+    },
+    {
+      "id": "VS-S01",
+      "slug": "vertical-safe-layout",
+      "nameJa": "縦画面の安全配置",
+      "category": "shorts",
+      "categoryNameJa": "Shorts特化",
+      "purpose": "縦UIとの重なりを減らす",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "format_adaptation",
+        "readability"
+      ],
+      "triggers": [
+        "vertical_video"
+      ],
+      "avoidWhen": [
+        "non_vertical_format"
+      ],
+      "requirements": [
+        "safe_area"
+      ],
+      "intensity": "low",
+      "densityCost": 1,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-S01"
+    },
+    {
+      "id": "VS-S02",
+      "slug": "short-sequential-caption",
+      "nameJa": "短文・逐次字幕",
+      "category": "shorts",
+      "categoryNameJa": "Shorts特化",
+      "purpose": "小画面で発話を追わせる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "retention",
+        "speech_support"
+      ],
+      "triggers": [
+        "vertical_video",
+        "fast_speech"
+      ],
+      "avoidWhen": [
+        "non_vertical_format"
+      ],
+      "requirements": [
+        "timed_words"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-S02"
+    },
+    {
+      "id": "VS-S03",
+      "slug": "vertical-top-bottom-split",
+      "nameJa": "縦の上下分割",
+      "category": "shorts",
+      "categoryNameJa": "Shorts特化",
+      "purpose": "実演と話者を同時に見せる",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "layout",
+        "explanation"
+      ],
+      "triggers": [
+        "vertical_video",
+        "demo_plus_speaker"
+      ],
+      "avoidWhen": [
+        "non_vertical_format"
+      ],
+      "requirements": [
+        "two_visual_sources"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-S03"
+    },
+    {
+      "id": "VS-S04",
+      "slug": "loop-connection",
+      "nameJa": "ループ接続",
+      "category": "shorts",
+      "categoryNameJa": "Shorts特化",
+      "purpose": "末尾から冒頭へつなぐ",
+      "inputModes": [
+        "generated",
+        "raw",
+        "hybrid"
+      ],
+      "intents": [
+        "retention",
+        "loop"
+      ],
+      "triggers": [
+        "short_form",
+        "loopable_ending"
+      ],
+      "avoidWhen": [
+        "non_vertical_format"
+      ],
+      "requirements": [
+        "opening_and_ending_beats"
+      ],
+      "intensity": "medium",
+      "densityCost": 2,
+      "compatibility": {
+        "pairsWellWith": [],
+        "avoidWith": []
+      },
+      "implementation": {
+        "status": "planned",
+        "adapter": null,
+        "component": null,
+        "fallbackPatternIds": []
+      },
+      "sourceRef": "VS-S04"
+    }
+  ]
+}

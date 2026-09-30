@@ -1,0 +1,317 @@
+{
+  "version": 1,
+  "scenes": [
+    {
+      "id": "narrated-diagram",
+      "name": "Narrated diagram",
+      "useWhen": [
+        "system_explanation",
+        "causal_chain",
+        "workflow"
+      ],
+      "requiredCapabilities": [
+        "narration",
+        "diagram"
+      ],
+      "optionalCapabilities": [
+        "subtitle",
+        "sfx"
+      ],
+      "preferredPatternIds": [
+        "VS-I03",
+        "VS-I04",
+        "VS-I09"
+      ]
+    },
+    {
+      "id": "kinetic-typography",
+      "name": "Kinetic typography",
+      "useWhen": [
+        "abstract_idea",
+        "strong_quote",
+        "no_visual_source"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "narration",
+        "sfx"
+      ],
+      "preferredPatternIds": [
+        "VS-T11",
+        "VS-I05"
+      ]
+    },
+    {
+      "id": "definition-card",
+      "name": "Definition card",
+      "useWhen": [
+        "new_term",
+        "concept_definition"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "narration"
+      ],
+      "preferredPatternIds": [
+        "VS-I01"
+      ]
+    },
+    {
+      "id": "comparison-board",
+      "name": "Comparison board",
+      "useWhen": [
+        "two_options",
+        "tradeoff",
+        "before_after"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "image",
+        "chart"
+      ],
+      "preferredPatternIds": [
+        "VS-I02",
+        "VS-L02"
+      ]
+    },
+    {
+      "id": "timeline-story",
+      "name": "Timeline story",
+      "useWhen": [
+        "chronology",
+        "history",
+        "milestones"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "image",
+        "narration"
+      ],
+      "preferredPatternIds": [
+        "VS-I08"
+      ]
+    },
+    {
+      "id": "ranking-board",
+      "name": "Ranking board",
+      "useWhen": [
+        "ranked_list",
+        "top_items"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "image",
+        "sfx"
+      ],
+      "preferredPatternIds": [
+        "VS-I11"
+      ]
+    },
+    {
+      "id": "data-story",
+      "name": "Data story",
+      "useWhen": [
+        "numbers",
+        "quantitative_comparison"
+      ],
+      "requiredCapabilities": [
+        "chart",
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "narration"
+      ],
+      "preferredPatternIds": [
+        "VS-I05",
+        "VS-I06",
+        "VS-I14"
+      ]
+    },
+    {
+      "id": "quote-evidence",
+      "name": "Quote / evidence card",
+      "useWhen": [
+        "external_quote",
+        "source_evidence"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "document_capture"
+      ],
+      "preferredPatternIds": [
+        "VS-I12",
+        "VS-I14"
+      ]
+    },
+    {
+      "id": "screen-demo",
+      "name": "Screen demonstration",
+      "useWhen": [
+        "software_tutorial",
+        "website_walkthrough"
+      ],
+      "requiredCapabilities": [
+        "screen_capture"
+      ],
+      "optionalCapabilities": [
+        "narration",
+        "subtitle"
+      ],
+      "preferredPatternIds": [
+        "VS-L10",
+        "VS-I09"
+      ]
+    },
+    {
+      "id": "generated-broll",
+      "name": "Generated B-roll",
+      "useWhen": [
+        "concrete_object",
+        "place",
+        "mood",
+        "visual_relief"
+      ],
+      "requiredCapabilities": [
+        "image"
+      ],
+      "optionalCapabilities": [
+        "generated-video",
+        "narration",
+        "music"
+      ],
+      "preferredPatternIds": [
+        "VS-L05"
+      ]
+    },
+    {
+      "id": "character-dialogue",
+      "name": "Character dialogue",
+      "useWhen": [
+        "conversation",
+        "roleplay",
+        "comedy"
+      ],
+      "requiredCapabilities": [
+        "character",
+        "narration"
+      ],
+      "optionalCapabilities": [
+        "subtitle",
+        "sfx"
+      ],
+      "preferredPatternIds": [
+        "VS-T02",
+        "VS-R10",
+        "VS-L01"
+      ]
+    },
+    {
+      "id": "product-showcase",
+      "name": "Product showcase",
+      "useWhen": [
+        "product_review",
+        "feature_explanation"
+      ],
+      "requiredCapabilities": [
+        "image"
+      ],
+      "optionalCapabilities": [
+        "chart",
+        "subtitle"
+      ],
+      "preferredPatternIds": [
+        "VS-R12",
+        "VS-I02",
+        "VS-I05"
+      ]
+    },
+    {
+      "id": "map-route",
+      "name": "Map / route",
+      "useWhen": [
+        "travel",
+        "geographic_explanation",
+        "journey"
+      ],
+      "requiredCapabilities": [
+        "map"
+      ],
+      "optionalCapabilities": [
+        "narration"
+      ],
+      "preferredPatternIds": [
+        "VS-I10"
+      ]
+    },
+    {
+      "id": "listicle",
+      "name": "Listicle",
+      "useWhen": [
+        "multiple_takeaways",
+        "tips",
+        "reasons"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "image",
+        "narration"
+      ],
+      "preferredPatternIds": [
+        "VS-I13",
+        "VS-G06"
+      ]
+    },
+    {
+      "id": "chapter-opener",
+      "name": "Chapter opener",
+      "useWhen": [
+        "major_topic_shift",
+        "new_chapter"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "music",
+        "sfx"
+      ],
+      "preferredPatternIds": [
+        "VS-E04",
+        "VS-B02"
+      ]
+    },
+    {
+      "id": "outro",
+      "name": "Outro",
+      "useWhen": [
+        "video_end",
+        "summary",
+        "next_action"
+      ],
+      "requiredCapabilities": [
+        "subtitle"
+      ],
+      "optionalCapabilities": [
+        "music"
+      ],
+      "preferredPatternIds": [
+        "VS-C05",
+        "VS-C06"
+      ]
+    }
+  ]
+}

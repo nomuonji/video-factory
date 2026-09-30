@@ -1,0 +1,17 @@
+{
+  "id": "oauth-60s",
+  "title": "OAuth 2.0 in 60 seconds",
+  "goal": "Explain the basic authorization flow without assuming prior knowledge",
+  "audience": "general software learners",
+  "durationTargetSeconds": 60,
+  "format": "vertical",
+  "language": "ja",
+  "inputMode": "generated",
+  "prompt": "OAuth 2.0の基本的な流れを60秒で説明する縦動画を作る",
+  "styleProfileId": "shorts",
+  "sourceAssets": [],
+  "constraints": {
+    "noPaidAssets": true,
+    "clarityFirst": true
+  }
+}

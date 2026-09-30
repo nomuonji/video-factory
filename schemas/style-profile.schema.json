@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StyleProfile",
+  "type": "object",
+  "required": [
+    "id",
+    "format",
+    "aspectRatio",
+    "pacing",
+    "captionDensity",
+    "effectDensity",
+    "strongEffectBudgetPer30s",
+    "minimumSamePatternGapSeconds",
+    "preferredSceneIds",
+    "preferredEditingCategories"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "format": {
+      "enum": [
+        "landscape",
+        "vertical",
+        "square"
+      ]
+    },
+    "aspectRatio": {
+      "type": "string"
+    },
+    "pacing": {
+      "enum": [
+        "slow",
+        "medium",
+        "fast",
+        "very_fast"
+      ]
+    },
+    "captionDensity": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "effectDensity": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "strongEffectBudgetPer30s": {
+      "type": "number",
+      "minimum": 0
+    },
+    "minimumSamePatternGapSeconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "preferredSceneIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preferredEditingCategories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
