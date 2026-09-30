@@ -5,7 +5,7 @@ export interface RenderScene extends StoryboardScene {
   endSeconds: number;
 }
 
-export interface RenderSpec {
+export interface RenderSpec extends Record<string, unknown> {
   productionId: string;
   title: string;
   styleProfileId: string;
