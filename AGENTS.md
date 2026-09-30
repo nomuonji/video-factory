@@ -30,6 +30,28 @@ A runnable production lives in `productions/<id>/` and normally contains:
 - `edit-plan.json`
 - `assets.json` when produced or acquired media exists
 
+## Triggering a GitHub Actions render
+
+After the production files are committed to the default branch, agents using the connected GitHub tool can trigger a render by creating an Issue:
+
+```text
+[render-video] <production_id>
+```
+
+Example:
+
+```text
+[render-video] oauth-60s
+```
+
+Do not create a render Issue until the production exists on the default branch. Do not create duplicate render Issues for the same production while one is open. The workflow only accepts render Issues opened by the repository owner. A successful run closes the Issue automatically; a failed run leaves it open with a run-log link.
+
+Humans can alternatively use `workflow_dispatch` from the Actions UI or:
+
+```bash
+gh workflow run render-video.yml -f production_id=<production_id>
+```
+
 ## Hard rules
 
 - Do not emit renderer-specific code when Storyboard + Edit Plan can express the same intent.

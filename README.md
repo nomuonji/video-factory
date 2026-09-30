@@ -6,16 +6,34 @@ Agent-native video production orchestration for generating complete videos from 
 
 Production rendering is designed to run on GitHub Actions.
 
+### Human / manual trigger
+
 1. Commit a production under `productions/<id>/`.
 2. Open **Actions → Render Video → Run workflow**.
 3. Enter the `production_id`.
 4. Download the resulting `video-<production_id>-<run_number>` artifact.
 
+### Agent trigger
+
+The connected GitHub agent can start a render without workflow-dispatch API access by creating an Issue owned by the repository owner with this exact title shape:
+
+```text
+[render-video] <production_id>
+```
+
+Example:
+
+```text
+[render-video] oauth-60s
+```
+
+Only Issues opened by the repository owner are accepted. On success, the workflow comments with the Actions run link and closes the Issue. On failure, it comments with the run logs and leaves the Issue open.
+
+Ordinary pushes do not render videos, so repository edits do not automatically spend rendering minutes.
+
 The workflow validates catalogs and TypeScript, installs Japanese fonts, renders through Remotion, and uploads the MP4 plus its render report and source production JSON. Artifacts are retained for 7 days.
 
-The workflow uses `workflow_dispatch` only, so editing the repository does not automatically spend rendering minutes.
-
-For local development, this still works:
+For local development:
 
 ```bash
 npm install
