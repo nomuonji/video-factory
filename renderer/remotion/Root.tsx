@@ -1,7 +1,7 @@
 import React from "react";
 import { Composition, type CalculateMetadataFunction } from "remotion";
-import { Video } from "./Video.js";
-import type { RenderSpec } from "./types.js";
+import { Video } from "./Video.tsx";
+import type { RenderSpec } from "./types.ts";
 
 const defaultSpec: RenderSpec = {
   productionId: "preview",
