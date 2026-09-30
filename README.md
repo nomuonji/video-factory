@@ -2,7 +2,20 @@
 
 Agent-native video production orchestration for generating complete videos from a prompt, optional source material, or both.
 
-## Runnable path
+## Recommended render path: GitHub Actions
+
+Production rendering is designed to run on GitHub Actions.
+
+1. Commit a production under `productions/<id>/`.
+2. Open **Actions → Render Video → Run workflow**.
+3. Enter the `production_id`.
+4. Download the resulting `video-<production_id>-<run_number>` artifact.
+
+The workflow validates catalogs and TypeScript, installs Japanese fonts, renders through Remotion, and uploads the MP4 plus its render report and source production JSON. Artifacts are retained for 7 days.
+
+The workflow uses `workflow_dispatch` only, so editing the repository does not automatically spend rendering minutes.
+
+For local development, this still works:
 
 ```bash
 npm install
@@ -17,7 +30,7 @@ The default input mode is **generated**: filmed source footage is not required.
 asset materialization → guardrails / prepare → Remotion → MP4
 ```
 
-The included OAuth example keeps narration disabled so it renders without a local TTS engine. Set `assetProviders.narration` to `voicevox` in its `production.config.json` to generate Japanese narration through a local VOICEVOX engine.
+The included OAuth example keeps narration disabled so it renders without a TTS engine. Set `assetProviders.narration` to `voicevox` in `production.config.json` when rendering in an environment where VOICEVOX Engine is running.
 
 See `docs/production-runner.md` for the production contract and provider configuration.
 
