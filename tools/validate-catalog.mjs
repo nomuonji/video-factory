@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 
 const root = new URL("../", import.meta.url);
 const load = async (path) => JSON.parse(await readFile(new URL(path, root), "utf8"));
@@ -9,6 +9,8 @@ const assets = await load("catalog/assets/assets.json");
 const styles = await load("catalog/styles/styles.json");
 const plan = await load("examples/prompt-only/edit-plan.json");
 const storyboard = await load("examples/prompt-only/storyboard.json");
+const rendererFiles = (await readdir(new URL("catalog/renderers/", root))).filter((name) => name.endsWith(".json"));
+const renderers = await Promise.all(rendererFiles.map((name) => load(`catalog/renderers/${name}`)));
 
 const errors = [];
 const fail = (message) => errors.push(message);
@@ -49,6 +51,20 @@ for (const profile of styles.profiles) {
   for (const id of profile.preferredSceneIds) if (!sceneIds.has(id)) fail(`${profile.id}: unknown preferred scene ${id}`);
 }
 
+const rendererIds = new Set();
+for (const renderer of renderers) {
+  if (!renderer.renderer) {
+    fail("renderer catalog: missing renderer id");
+    continue;
+  }
+  if (rendererIds.has(renderer.renderer)) fail(`renderer catalog: duplicate renderer ${renderer.renderer}`);
+  rendererIds.add(renderer.renderer);
+  for (const [patternId, support] of Object.entries(renderer.patterns ?? {})) {
+    if (!patternIds.has(patternId)) fail(`${renderer.renderer}: unknown pattern ${patternId}`);
+    if (!["supported","partial","planned"].includes(support.status)) fail(`${renderer.renderer}: invalid status for ${patternId}`);
+  }
+}
+
 if (!styleIds.has(plan.styleProfileId)) fail(`example plan: unknown style ${plan.styleProfileId}`);
 for (const op of plan.operations) if (!patternIds.has(op.patternId)) fail(`example plan: unknown pattern ${op.patternId}`);
 for (const scene of storyboard.scenes) {
@@ -60,4 +76,4 @@ if (errors.length) {
   for (const error of errors) console.error("Catalog validation failed:", error);
   process.exit(1);
 }
-console.log(`OK: ${editing.patterns.length} editing patterns, ${scenes.scenes.length} scenes, ${assets.capabilities.length} asset capabilities, ${styles.profiles.length} styles`);
+console.log(`OK: ${editing.patterns.length} editing patterns, ${scenes.scenes.length} scenes, ${assets.capabilities.length} asset capabilities, ${styles.profiles.length} styles, ${renderers.length} renderer catalogs`);
