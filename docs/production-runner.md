@@ -17,7 +17,7 @@ resolve + validate production ID
                     ↓
 validate production files
                     ↓
-Node 22 + Noto CJK + FFmpeg
+Node 22 + Noto CJK
                     ↓
 npm install
                     ↓

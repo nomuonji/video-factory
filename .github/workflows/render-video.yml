@@ -78,12 +78,12 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install Japanese fonts and media tools
+      - name: Install Japanese fonts
         shell: bash
         run: |
           set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends fonts-noto-cjk ffmpeg
+          sudo apt-get -qq update
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
 
       - name: Install dependencies
         shell: bash
