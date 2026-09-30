@@ -53,10 +53,12 @@ export const voicevoxProvider: AssetProvider = {
       ?? process.env.VOICEVOX_URL
       ?? "http://127.0.0.1:50021",
     ).replace(/\/$/, "");
+    const envSpeaker = Number(process.env.VOICEVOX_SPEAKER ?? 3);
+    const defaultSpeaker = Number.isFinite(envSpeaker) ? envSpeaker : 3;
     const speaker = numberConfig(
       context.providerConfig,
       "speaker",
-      Number(process.env.VOICEVOX_SPEAKER ?? 3),
+      defaultSpeaker,
     );
 
     const queryUrl = new URL(`${baseUrl}/audio_query`);

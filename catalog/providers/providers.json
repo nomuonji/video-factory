@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "providers": [
+    {
+      "id": "voicevox",
+      "capabilities": [
+        "narration"
+      ],
+      "mode": "local-http",
+      "availability": "optional",
+      "description": "Free/local Japanese narration through a running VOICEVOX Engine.",
+      "config": {
+        "url": {
+          "type": "string",
+          "default": "http://127.0.0.1:50021"
+        },
+        "speaker": {
+          "type": "number",
+          "default": 3
+        },
+        "speedScale": {
+          "type": "number",
+          "default": 1
+        },
+        "intonationScale": {
+          "type": "number",
+          "default": 1
+        },
+        "pitchScale": {
+          "type": "number",
+          "default": 0
+        },
+        "volumeScale": {
+          "type": "number",
+          "default": 1
+        },
+        "playbackVolume": {
+          "type": "number",
+          "default": 1
+        }
+      }
+    }
+  ]
+}

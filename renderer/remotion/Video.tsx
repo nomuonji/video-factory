@@ -1,7 +1,8 @@
 import React from "react";
-import { Audio } from "@remotion/media";
+import { Audio, Video as MediaVideo } from "@remotion/media";
 import {
   AbsoluteFill,
+  Img,
   Sequence,
   interpolate,
   spring,
@@ -45,7 +46,40 @@ const Card: React.FC<{ children: ReactNode; style?: CSSProperties }> = ({ childr
   </div>
 );
 
-const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }> = ({ scene, operations }) => {
+
+const SceneMedia: React.FC<{ scene: RenderScene; assets: ProducedAssetRecord[] }> = ({ scene, assets }) => {
+  const media = assets.find((asset) =>
+    asset.sceneId === scene.id
+    && ["image", "illustration", "generated-video", "screen_capture", "document_capture"].includes(asset.capabilityId),
+  );
+  if (!media) return null;
+
+  const src = assetSource(media);
+  const prominent = ["generated-broll", "product-showcase", "screen-demo"].includes(scene.scenePatternId);
+  const mediaStyle: CSSProperties = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    opacity: prominent ? 1 : 0.34,
+  };
+
+  return (
+    <AbsoluteFill>
+      {media.capabilityId === "generated-video" || media.mediaType.startsWith("video/")
+        ? <MediaVideo src={src} muted style={mediaStyle} />
+        : <Img src={src} style={mediaStyle} />}
+      <AbsoluteFill
+        style={{
+          background: prominent
+            ? "linear-gradient(180deg, rgba(5,8,22,.10), rgba(5,8,22,.58))"
+            : "rgba(5,8,22,.42)",
+        }}
+      />
+    </AbsoluteFill>
+  );
+};
+
+const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[]; assets: ProducedAssetRecord[] }> = ({ scene, operations, assets }) => {
   const { width, height, fps } = useVideoConfig();
   const frame = useCurrentFrame();
   const enter = spring({ frame, fps, config: { damping: 18, stiffness: 120 } });
@@ -60,6 +94,7 @@ const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }
   if (scene.scenePatternId === "narrated-diagram") {
     return (
       <AbsoluteFill style={{ ...baseFont, padding: safePadding(height), justifyContent: "center" }}>
+        <SceneMedia scene={scene} assets={assets} />
         <div style={{ fontSize: height * 0.06, fontWeight: 800, marginBottom: 48, transform }}>{headline}</div>
         <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
           {(resolvedSteps.length ? resolvedSteps : [body]).map((step, index) => (
@@ -81,6 +116,7 @@ const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }
   if (scene.scenePatternId === "definition-card") {
     return (
       <AbsoluteFill style={{ ...baseFont, padding: safePadding(height), justifyContent: "center", alignItems: "center" }}>
+        <SceneMedia scene={scene} assets={assets} />
         <Card style={{ width: "82%", transform }}>
           <div style={{ color: palette.accent, fontSize: height * 0.028, fontWeight: 800, marginBottom: 20 }}>DEFINITION</div>
           <div style={{ fontSize: height * 0.07, fontWeight: 900, marginBottom: 28 }}>{headline}</div>
@@ -93,6 +129,7 @@ const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }
   if (scene.scenePatternId === "outro") {
     return (
       <AbsoluteFill style={{ ...baseFont, padding: safePadding(height), justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+        <SceneMedia scene={scene} assets={assets} />
         <div style={{ fontSize: height * 0.034, color: palette.accent, fontWeight: 800, marginBottom: 24 }}>TAKEAWAY</div>
         <div style={{ fontSize: height * 0.066, lineHeight: 1.25, fontWeight: 900, maxWidth: width * 0.86, transform, whiteSpace: "pre-line" }}>{headline}</div>
         <div style={{ fontSize: height * 0.033, lineHeight: 1.55, color: palette.muted, marginTop: 36, maxWidth: width * 0.82 }}>{body}</div>
@@ -102,6 +139,7 @@ const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }
 
   return (
     <AbsoluteFill style={{ ...baseFont, padding: safePadding(height), justifyContent: "center" }}>
+      <SceneMedia scene={scene} assets={assets} />
       <div style={{ fontSize: height * 0.075, lineHeight: 1.15, fontWeight: 900, maxWidth: width * 0.88, transform, whiteSpace: "pre-line" }}>{headline}</div>
       <div style={{ marginTop: 36, fontSize: height * 0.034, lineHeight: 1.55, color: palette.muted, maxWidth: width * 0.84 }}>{body}</div>
     </AbsoluteFill>
@@ -261,13 +299,13 @@ const OperationOverlay: React.FC<{ operation: EditOperation }> = ({ operation })
   return null;
 };
 
-const SceneSequence: React.FC<{ scene: RenderScene; operations: EditOperation[] }> = ({ scene, operations }) => {
+const SceneSequence: React.FC<{ scene: RenderScene; operations: EditOperation[]; assets: ProducedAssetRecord[] }> = ({ scene, operations, assets }) => {
   const { fps } = useVideoConfig();
   const from = Math.round(scene.startSeconds * fps);
   const durationInFrames = Math.max(1, Math.round((scene.endSeconds - scene.startSeconds) * fps));
   return (
     <Sequence from={from} durationInFrames={durationInFrames}>
-      <SceneContent scene={scene} operations={operations.filter((op) => op.sceneId === scene.id)} />
+      <SceneContent scene={scene} operations={operations.filter((op) => op.sceneId === scene.id)} assets={assets.filter((asset) => asset.sceneId === scene.id)} />
     </Sequence>
   );
 };
@@ -288,7 +326,7 @@ const NarrationTracks: React.FC<{ spec: RenderSpec }> = ({ spec }) => {
           const durationInFrames = Math.max(1, Math.round((scene.endSeconds - scene.startSeconds) * fps));
           return (
             <Sequence key={asset.id} from={from} durationInFrames={durationInFrames}>
-              <Audio src={assetSource(asset)} />
+              <Audio src={assetSource(asset)} volume={Number.isFinite(Number(asset.metadata?.volume)) ? Number(asset.metadata?.volume) : 1} />
             </Sequence>
           );
         })}
@@ -324,7 +362,7 @@ export const Video: React.FC<RenderSpec> = (spec) => {
   return (
     <AbsoluteFill style={{ background: `radial-gradient(circle at 20% 10%, #16213e 0%, ${palette.bg} 50%, #050816 100%)`, overflow: "hidden" }}>
       <div style={{ width: "100%", height: "100%", transform: `translate(${shakeX}px,${shakeY}px) scale(${scale})`, transformOrigin: "center center", filter: monochrome ? "grayscale(1)" : undefined }}>
-        {spec.scenes.map((scene) => <SceneSequence key={scene.id} scene={scene} operations={spec.operations} />)}
+        {spec.scenes.map((scene) => <SceneSequence key={scene.id} scene={scene} operations={spec.operations} assets={spec.assets} />)}
       </div>
 
       {darkZoom ? <AbsoluteFill style={{ background: "rgba(0,0,0,.22)", pointerEvents: "none" }} /> : null}
