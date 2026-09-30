@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
     "check": "npm run validate && npm run typecheck",
     "assets": "tsx tools/materialize-assets.ts",
-    "prepare": "tsx tools/prepare-production.ts",
+    "prepare:production": "tsx tools/prepare-production.ts",
     "render": "tsx tools/render-production.ts",
     "studio": "remotion studio renderer/remotion/index.ts"
   },

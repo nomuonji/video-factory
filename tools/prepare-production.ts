@@ -6,7 +6,7 @@ import { applyEditingGuardrails } from "../src/planner/guardrails.js";
 import { buildRenderSpec, type RendererSupportCatalog } from "../src/runner/build-render-spec.js";
 
 const id = process.argv[2];
-if (!id || !/^[A-Za-z0-9._-]+$/.test(id)) throw new Error("Usage: npm run prepare -- <production-id>");
+if (!id || !/^[A-Za-z0-9._-]+$/.test(id)) throw new Error("Usage: npm run prepare:production -- <production-id>");
 
 const root = process.cwd();
 const dir = resolve(root, "productions", id);
