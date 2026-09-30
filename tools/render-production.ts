@@ -20,7 +20,7 @@ const run = (command: string, args: string[]) => new Promise<void>((resolvePromi
 
 const npm = process.platform === "win32" ? "npm.cmd" : "npm";
 await run(npm, ["run", "assets", "--", id]);
-await run(npm, ["run", "prepare", "--", id]);
+await run(npm, ["run", "prepare:production", "--", id]);
 
 const remotion = resolve(root, "node_modules", ".bin", process.platform === "win32" ? "remotion.cmd" : "remotion");
 await run(remotion, [

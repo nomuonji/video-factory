@@ -88,7 +88,7 @@ npm run assets
         ↓
 assets.json + public/generated/
         ↓
-npm run prepare
+npm run prepare:production
         ↓
 RenderSpec + report
         ↓
@@ -97,7 +97,7 @@ npm run render
 outputs/<id>.mp4
 ```
 
-`npm run render -- <id>` runs the asset and prepare stages automatically before Remotion.
+`npm run render -- <id>` runs the asset and prepare-production stages automatically before Remotion.
 
 ## Narration
 

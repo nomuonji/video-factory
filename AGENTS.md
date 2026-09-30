@@ -18,7 +18,7 @@ Turn a user brief into a reproducible video production. Prefer structured produc
 ## Default flow
 
 ```text
-brief → storyboard → asset requests → edit plan → prepare → render
+brief → storyboard → asset requests → edit plan → prepare:production → render
 ```
 
 For prompt-only productions, do not invent a fake source-video stage. Generate scene and asset requirements directly from the brief.
@@ -79,4 +79,4 @@ Add a renderer support catalog and adapter/runtime. Do not change Storyboard or 
 ### Style
 Add a profile under `catalog/styles/styles.json`. Styles constrain selection; they do not duplicate patterns.
 
-Run `npm run validate` after catalog changes, `npm run typecheck` after TypeScript changes, and `npm run prepare -- <id>` before rendering.
+Run `npm run validate` after catalog changes, `npm run typecheck` after TypeScript changes, and `npm run prepare:production -- <id>` before rendering.
