@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScenePattern",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "useWhen",
+    "requiredCapabilities",
+    "optionalCapabilities",
+    "preferredPatternIds"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "useWhen": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requiredCapabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "optionalCapabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preferredPatternIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

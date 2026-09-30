@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EditPlan",
+  "type": "object",
+  "required": [
+    "productionId",
+    "version",
+    "styleProfileId",
+    "durationSeconds",
+    "operations"
+  ],
+  "properties": {
+    "productionId": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "styleProfileId": {
+      "type": "string"
+    },
+    "durationSeconds": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "sceneId",
+          "start",
+          "end",
+          "patternId",
+          "reason",
+          "intensity",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "sceneId": {
+            "type": "string"
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0
+          },
+          "end": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "patternId": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "intensity": {
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "params": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EditingPattern",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "nameJa",
+    "category",
+    "purpose",
+    "inputModes",
+    "intents",
+    "triggers",
+    "avoidWhen",
+    "requirements",
+    "intensity",
+    "densityCost",
+    "implementation",
+    "sourceRef"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^VS-[A-Z][0-9]{2}$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "nameJa": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "categoryNameJa": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "inputModes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "generated",
+          "raw",
+          "hybrid"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "intents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "avoidWhen": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "intensity": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "densityCost": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "compatibility": {
+      "type": "object"
+    },
+    "implementation": {
+      "type": "object",
+      "required": [
+        "status",
+        "adapter",
+        "component",
+        "fallbackPatternIds"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "planned",
+            "partial",
+            "supported"
+          ]
+        },
+        "adapter": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "component": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fallbackPatternIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceRef": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssetCapability",
+  "type": "object",
+  "required": [
+    "id",
+    "kind",
+    "description",
+    "inputs",
+    "outputs",
+    "providerPolicy"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "kind": {
+      "enum": [
+        "visual",
+        "audio",
+        "text",
+        "data"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "providerPolicy": {
+      "enum": [
+        "internal",
+        "pluggable",
+        "internal_or_pluggable"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

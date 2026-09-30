@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "id": "youtube-standard",
+      "format": "landscape",
+      "aspectRatio": "16:9",
+      "pacing": "medium",
+      "captionDensity": "medium",
+      "effectDensity": "medium",
+      "strongEffectBudgetPer30s": 4,
+      "minimumSamePatternGapSeconds": 4,
+      "preferredSceneIds": [
+        "narrated-diagram",
+        "generated-broll",
+        "comparison-board"
+      ],
+      "preferredEditingCategories": [
+        "speech-caption",
+        "information-explainer",
+        "layout"
+      ]
+    },
+    {
+      "id": "youtube-fast",
+      "format": "landscape",
+      "aspectRatio": "16:9",
+      "pacing": "fast",
+      "captionDensity": "high",
+      "effectDensity": "high",
+      "strongEffectBudgetPer30s": 7,
+      "minimumSamePatternGapSeconds": 2.5,
+      "preferredSceneIds": [
+        "generated-broll",
+        "kinetic-typography",
+        "data-story"
+      ],
+      "preferredEditingCategories": [
+        "reaction-emphasis",
+        "pacing-transition",
+        "speech-caption"
+      ]
+    },
+    {
+      "id": "shorts",
+      "format": "vertical",
+      "aspectRatio": "9:16",
+      "pacing": "very_fast",
+      "captionDensity": "high",
+      "effectDensity": "high",
+      "strongEffectBudgetPer30s": 8,
+      "minimumSamePatternGapSeconds": 2,
+      "preferredSceneIds": [
+        "kinetic-typography",
+        "generated-broll",
+        "comparison-board"
+      ],
+      "preferredEditingCategories": [
+        "shorts",
+        "speech-caption",
+        "reaction-emphasis"
+      ]
+    },
+    {
+      "id": "calm-explainer",
+      "format": "landscape",
+      "aspectRatio": "16:9",
+      "pacing": "slow",
+      "captionDensity": "low",
+      "effectDensity": "low",
+      "strongEffectBudgetPer30s": 2,
+      "minimumSamePatternGapSeconds": 7,
+      "preferredSceneIds": [
+        "narrated-diagram",
+        "definition-card",
+        "data-story"
+      ],
+      "preferredEditingCategories": [
+        "information-explainer",
+        "layout"
+      ]
+    },
+    {
+      "id": "documentary",
+      "format": "landscape",
+      "aspectRatio": "16:9",
+      "pacing": "slow",
+      "captionDensity": "low",
+      "effectDensity": "low",
+      "strongEffectBudgetPer30s": 2,
+      "minimumSamePatternGapSeconds": 8,
+      "preferredSceneIds": [
+        "quote-evidence",
+        "timeline-story",
+        "generated-broll"
+      ],
+      "preferredEditingCategories": [
+        "information-explainer",
+        "audio",
+        "pacing-transition"
+      ]
+    },
+    {
+      "id": "product-review",
+      "format": "landscape",
+      "aspectRatio": "16:9",
+      "pacing": "medium",
+      "captionDensity": "medium",
+      "effectDensity": "medium",
+      "strongEffectBudgetPer30s": 4,
+      "minimumSamePatternGapSeconds": 4,
+      "preferredSceneIds": [
+        "product-showcase",
+        "comparison-board",
+        "data-story"
+      ],
+      "preferredEditingCategories": [
+        "information-explainer",
+        "layout",
+        "reaction-emphasis"
+      ]
+    }
+  ]
+}
