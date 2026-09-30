@@ -6,28 +6,61 @@ Video Factory renders prompt-first productions without requiring filmed source f
 
 The normal production renderer is `.github/workflows/render-video.yml`.
 
-It is deliberately manual-dispatch only:
+Two explicit triggers are supported:
 
 ```text
-workflow_dispatch
-  production_id
-      ↓
+workflow_dispatch(production_id)
+          OR
+owner Issue: [render-video] <production_id>
+                    ↓
+resolve + validate production ID
+                    ↓
 validate production files
-      ↓
+                    ↓
 Node 22 + Noto CJK + FFmpeg
-      ↓
+                    ↓
 npm install
-      ↓
+                    ↓
 npm run check
-      ↓
+                    ↓
 npm run render -- <production_id>
-      ↓
+                    ↓
 verify MP4 + report
-      ↓
+                    ↓
 GitHub Artifact (7 days)
 ```
 
-The workflow will not render on ordinary pushes, so source/catalog changes do not automatically consume rendering minutes.
+Ordinary pushes do not render videos.
+
+### Manual UI / CLI dispatch
+
+UI:
+
+```text
+Actions → Render Video → Run workflow
+```
+
+GitHub CLI:
+
+```bash
+gh workflow run render-video.yml -f production_id=oauth-60s
+```
+
+### Agent / MCP dispatch
+
+The current connected GitHub tool can create Issues but does not expose the workflow-dispatch write API. To keep the production flow agent-operable, create an Issue with this title:
+
+```text
+[render-video] oauth-60s
+```
+
+Security rules:
+
+- the Issue opener must equal `github.repository_owner`;
+- the title must start with `[render-video] `;
+- the parsed production ID must match `^[A-Za-z0-9._-]+$`.
+
+A successful Issue-triggered render comments with the Actions run URL and artifact name, then closes the Issue. A failed render comments with the run logs and leaves the Issue open.
 
 The uploaded artifact contains:
 
@@ -35,16 +68,6 @@ The uploaded artifact contains:
 - `render-report.json`
 - `run-metadata.json`
 - the production JSON files used for that run
-
-The workflow summary links back to the Actions run, which is the review/download entry point.
-
-### CLI dispatch
-
-With GitHub CLI authenticated:
-
-```bash
-gh workflow run render-video.yml -f production_id=oauth-60s
-```
 
 ## Production folder
 

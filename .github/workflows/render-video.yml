@@ -1,6 +1,6 @@
 name: Render Video
 
-run-name: Render ${{ inputs.production_id }}
+run-name: Render ${{ inputs.production_id || github.event.issue.title }}
 
 on:
   workflow_dispatch:
@@ -10,22 +10,53 @@ on:
         required: true
         default: oauth-60s
         type: string
+  issues:
+    types: [opened]
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
-  group: video-render-${{ inputs.production_id }}
+  group: video-render-${{ github.event_name }}-${{ inputs.production_id || github.event.issue.number }}
   cancel-in-progress: true
 
 jobs:
   render:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event_name == 'issues' &&
+        github.event.issue.user.login == github.repository_owner &&
+        startsWith(github.event.issue.title, '[render-video] ')
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      PRODUCTION_ID: ${{ inputs.production_id }}
 
     steps:
+      - name: Resolve production ID
+        id: resolve
+        shell: bash
+        env:
+          DISPATCH_ID: ${{ inputs.production_id }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            production_id="$DISPATCH_ID"
+          else
+            production_id="$(printf '%s' "$ISSUE_TITLE" | sed -E 's/^\[render-video\][[:space:]]+//')"
+          fi
+
+          if [[ ! "$production_id" =~ ^[A-Za-z0-9._-]+$ ]]; then
+            echo "::error::Invalid production_id: $production_id"
+            exit 1
+          fi
+
+          echo "production_id=$production_id" >> "$GITHUB_OUTPUT"
+          echo "PRODUCTION_ID=$production_id" >> "$GITHUB_ENV"
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -33,11 +64,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
-          if [[ ! "$PRODUCTION_ID" =~ ^[A-Za-z0-9._-]+$ ]]; then
-            echo "::error::Invalid production_id: $PRODUCTION_ID"
-            exit 1
-          fi
 
           production_dir="productions/$PRODUCTION_ID"
           for file in brief.json storyboard.json edit-plan.json; do
@@ -113,6 +139,7 @@ jobs:
             runId: process.env.GITHUB_RUN_ID,
             runNumber: process.env.GITHUB_RUN_NUMBER,
             actor: process.env.GITHUB_ACTOR,
+            eventName: process.env.GITHUB_EVENT_NAME,
             createdAt: new Date().toISOString(),
           };
 
@@ -125,8 +152,8 @@ jobs:
       - name: Upload MP4 and render report
         uses: actions/upload-artifact@v4
         with:
-          name: video-${{ inputs.production_id }}-${{ github.run_number }}
-          path: artifact/${{ inputs.production_id }}/
+          name: video-${{ steps.resolve.outputs.production_id }}-${{ github.run_number }}
+          path: artifact/${{ steps.resolve.outputs.production_id }}/
           if-no-files-found: error
           retention-days: 7
           compression-level: 0
@@ -145,3 +172,30 @@ jobs:
             echo
             echo "The artifact contains the MP4, render report, run metadata, and the production JSON used for the render."
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report success to render issue
+        if: success() && github.event_name == 'issues'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          artifact_name="video-$PRODUCTION_ID-${{ github.run_number }}"
+
+          gh issue comment "$ISSUE_NUMBER"             --repo "$GITHUB_REPOSITORY"             --body "Render completed for \`$PRODUCTION_ID\`. Artifact: \`$artifact_name\`. Run: $run_url"
+
+          gh issue close "$ISSUE_NUMBER"             --repo "$GITHUB_REPOSITORY"             --reason completed
+
+      - name: Report failure to render issue
+        if: failure() && github.event_name == 'issues'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          run_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+          gh issue comment "$ISSUE_NUMBER"             --repo "$GITHUB_REPOSITORY"             --body "Render failed. Run logs: $run_url"
