@@ -8,7 +8,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import type { CSSProperties, ReactNode } from "react";
-import type { EditOperation } from "../../src/core/types.js";
+import type { EditOperation, StoryboardVisual } from "../../src/core/types.js";
 import type { RenderScene, RenderSpec } from "./types.js";
 
 const palette = {
@@ -48,7 +48,7 @@ const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }
   const { width, height } = useVideoConfig();
   const frame = useCurrentFrame();
   const enter = spring({ frame, fps: 30, config: { damping: 18, stiffness: 120 } });
-  const visual = scene.visual ?? {};
+  const visual: StoryboardVisual = scene.visual ?? {};
   const headline = typeof visual.headline === "string" ? visual.headline : scene.purpose;
   const body = typeof visual.body === "string" ? visual.body : scene.narration;
   const steps = Array.isArray(visual.steps) ? visual.steps.map(String) : [];
@@ -93,7 +93,7 @@ const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }
     return (
       <AbsoluteFill style={{ ...baseFont, padding: safePadding(height), justifyContent: "center", alignItems: "center", textAlign: "center" }}>
         <div style={{ fontSize: height * 0.034, color: palette.accent, fontWeight: 800, marginBottom: 24 }}>TAKEAWAY</div>
-        <div style={{ fontSize: height * 0.066, lineHeight: 1.25, fontWeight: 900, maxWidth: width * 0.86, transform }}>{headline}</div>
+        <div style={{ fontSize: height * 0.066, lineHeight: 1.25, fontWeight: 900, maxWidth: width * 0.86, transform, whiteSpace: "pre-line" }}>{headline}</div>
         <div style={{ fontSize: height * 0.033, lineHeight: 1.55, color: palette.muted, marginTop: 36, maxWidth: width * 0.82 }}>{body}</div>
       </AbsoluteFill>
     );
@@ -101,7 +101,7 @@ const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }
 
   return (
     <AbsoluteFill style={{ ...baseFont, padding: safePadding(height), justifyContent: "center" }}>
-      <div style={{ fontSize: height * 0.075, lineHeight: 1.15, fontWeight: 900, maxWidth: width * 0.88, transform }}>{headline}</div>
+      <div style={{ fontSize: height * 0.075, lineHeight: 1.15, fontWeight: 900, maxWidth: width * 0.88, transform, whiteSpace: "pre-line" }}>{headline}</div>
       <div style={{ marginTop: 36, fontSize: height * 0.034, lineHeight: 1.55, color: palette.muted, maxWidth: width * 0.84 }}>{body}</div>
     </AbsoluteFill>
   );
@@ -315,7 +315,7 @@ export const Video: React.FC<RenderSpec> = (spec) => {
         const durationInFrames=Math.max(1,Math.round((operation.end-operation.start)*fps));
         return (
           <Sequence key={operation.id} from={from} durationInFrames={durationInFrames}>
-            <FadeOverlay />
+            <FadeOverlay durationInFrames={durationInFrames} />
           </Sequence>
         );
       })}
