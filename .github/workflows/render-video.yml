@@ -1,0 +1,147 @@
+name: Render Video
+
+run-name: Render ${{ inputs.production_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      production_id:
+        description: Production directory name under productions/
+        required: true
+        default: oauth-60s
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: video-render-${{ inputs.production_id }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PRODUCTION_ID: ${{ inputs.production_id }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate production input
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$PRODUCTION_ID" =~ ^[A-Za-z0-9._-]+$ ]]; then
+            echo "::error::Invalid production_id: $PRODUCTION_ID"
+            exit 1
+          fi
+
+          production_dir="productions/$PRODUCTION_ID"
+          for file in brief.json storyboard.json edit-plan.json; do
+            if [[ ! -f "$production_dir/$file" ]]; then
+              echo "::error::Missing required file: $production_dir/$file"
+              exit 1
+            fi
+          done
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Japanese fonts and media tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk ffmpeg
+
+      - name: Install dependencies
+        shell: bash
+        run: npm install --no-audit --no-fund
+
+      - name: Validate catalogs and types
+        shell: bash
+        run: npm run check
+
+      - name: Render production
+        shell: bash
+        run: npm run render -- "$PRODUCTION_ID"
+
+      - name: Verify render output
+        shell: bash
+        run: |
+          set -euo pipefail
+          output="outputs/$PRODUCTION_ID.mp4"
+          report="productions/$PRODUCTION_ID/.generated/report.json"
+
+          test -s "$output"
+          test -s "$report"
+
+          echo "output=$output" >> "$GITHUB_ENV"
+          echo "report=$report" >> "$GITHUB_ENV"
+
+      - name: Assemble render artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          artifact_dir="artifact/$PRODUCTION_ID"
+          mkdir -p "$artifact_dir/production"
+
+          cp "$output" "$artifact_dir/$PRODUCTION_ID.mp4"
+          cp "$report" "$artifact_dir/render-report.json"
+
+          for file in brief.json storyboard.json edit-plan.json production.config.json assets.json; do
+            src="productions/$PRODUCTION_ID/$file"
+            if [[ -f "$src" ]]; then
+              cp "$src" "$artifact_dir/production/$file"
+            fi
+          done
+
+          node - <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+
+          const id = process.env.PRODUCTION_ID;
+          const metadata = {
+            productionId: id,
+            repository: process.env.GITHUB_REPOSITORY,
+            commitSha: process.env.GITHUB_SHA,
+            runId: process.env.GITHUB_RUN_ID,
+            runNumber: process.env.GITHUB_RUN_NUMBER,
+            actor: process.env.GITHUB_ACTOR,
+            createdAt: new Date().toISOString(),
+          };
+
+          fs.writeFileSync(
+            path.join("artifact", id, "run-metadata.json"),
+            JSON.stringify(metadata, null, 2) + "\n",
+          );
+          NODE
+
+      - name: Upload MP4 and render report
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ inputs.production_id }}-${{ github.run_number }}
+          path: artifact/${{ inputs.production_id }}/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+
+      - name: Write job summary
+        if: success()
+        shell: bash
+        run: |
+          {
+            echo "## Video render complete"
+            echo
+            echo "- Production: \`$PRODUCTION_ID\`"
+            echo "- Artifact: \`video-$PRODUCTION_ID-${{ github.run_number }}\`"
+            echo "- Commit: \`${{ github.sha }}\`"
+            echo "- Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo
+            echo "The artifact contains the MP4, render report, run metadata, and the production JSON used for the render."
+          } >> "$GITHUB_STEP_SUMMARY"

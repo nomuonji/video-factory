@@ -2,6 +2,50 @@
 
 Video Factory renders prompt-first productions without requiring filmed source footage.
 
+## GitHub Actions rendering
+
+The normal production renderer is `.github/workflows/render-video.yml`.
+
+It is deliberately manual-dispatch only:
+
+```text
+workflow_dispatch
+  production_id
+      ↓
+validate production files
+      ↓
+Node 22 + Noto CJK + FFmpeg
+      ↓
+npm install
+      ↓
+npm run check
+      ↓
+npm run render -- <production_id>
+      ↓
+verify MP4 + report
+      ↓
+GitHub Artifact (7 days)
+```
+
+The workflow will not render on ordinary pushes, so source/catalog changes do not automatically consume rendering minutes.
+
+The uploaded artifact contains:
+
+- `<production_id>.mp4`
+- `render-report.json`
+- `run-metadata.json`
+- the production JSON files used for that run
+
+The workflow summary links back to the Actions run, which is the review/download entry point.
+
+### CLI dispatch
+
+With GitHub CLI authenticated:
+
+```bash
+gh workflow run render-video.yml -f production_id=oauth-60s
+```
+
 ## Production folder
 
 Create `productions/<id>/` with:
@@ -46,7 +90,7 @@ Keep narration disabled:
 }
 ```
 
-Enable local VOICEVOX:
+Enable VOICEVOX in an environment where VOICEVOX Engine is running:
 
 ```json
 {
@@ -63,24 +107,16 @@ Enable local VOICEVOX:
 }
 ```
 
-You can also set `VOICEVOX_URL` and `VOICEVOX_SPEAKER`. These are configuration values, not credentials.
+You can also set `VOICEVOX_URL` and `VOICEVOX_SPEAKER`.
 
-Each Storyboard scene requesting the `narration` capability becomes one WAV file under `public/generated/<production-id>/`. `assets.json` links it back to the scene, and the Remotion renderer places the audio at that scene's start time.
+Each Storyboard scene requesting `narration` becomes one WAV file under `public/generated/<production-id>/`. `assets.json` links it back to the scene, and Remotion places the audio at the scene start.
 
-## Prepare
+The current GitHub Actions workflow does not start VOICEVOX Engine automatically. Productions with `narration: none` render immediately; VOICEVOX-on-Actions should be added as a separate provider/runtime step rather than hard-wired into the renderer.
+
+## Local render
 
 ```bash
 npm install
-npm run prepare -- oauth-60s
-```
-
-Preparation performs production ID checks, style guardrails, renderer capability filtering, timeline validation, and writes `.generated/render-props.json` plus `.generated/report.json`.
-
-Unsupported edit operations are explicit in the report; the base scene still renders.
-
-## Render
-
-```bash
 npm run render -- oauth-60s
 ```
 
