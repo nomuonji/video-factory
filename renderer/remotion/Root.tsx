@@ -1,5 +1,5 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, type CalculateMetadataFunction } from "remotion";
 import { Video } from "./Video.js";
 import type { RenderSpec } from "./types.js";
 
@@ -17,6 +17,13 @@ const defaultSpec: RenderSpec = {
   rendererReport: { rendererId: "remotion", omittedOperationIds: [], warnings: [] },
 };
 
+const calculateMetadata: CalculateMetadataFunction<RenderSpec> = ({ props }) => ({
+  durationInFrames: Math.max(1, Math.ceil(props.durationSeconds * props.fps)),
+  fps: props.fps,
+  width: props.width,
+  height: props.height,
+});
+
 export const RemotionRoot: React.FC = () => (
   <Composition
     id="Video"
@@ -26,11 +33,6 @@ export const RemotionRoot: React.FC = () => (
     width={1920}
     height={1080}
     defaultProps={defaultSpec}
-    calculateMetadata={({ props }) => ({
-      durationInFrames: Math.max(1, Math.ceil(props.durationSeconds * props.fps)),
-      fps: props.fps,
-      width: props.width,
-      height: props.height,
-    })}
+    calculateMetadata={calculateMetadata}
   />
 );
