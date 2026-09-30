@@ -9,6 +9,7 @@ export interface PatternSelectionContext {
   flags: string[];
   maxIntensity?: Intensity;
   style?: StyleProfile;
+  supportedPatternIds?: string[];
 }
 
 export interface PatternCandidate {
@@ -25,6 +26,7 @@ export function selectEditingPatterns(
   limit = 5,
 ): PatternCandidate[] {
   const maxIntensity = context.maxIntensity ?? "high";
+  const supported = new Set(context.supportedPatternIds ?? []);
 
   return [...registry.editing.values()]
     .filter((pattern) => pattern.inputModes.includes(context.inputMode))
@@ -35,17 +37,13 @@ export function selectEditingPatterns(
       const matchedIntents = pattern.intents.filter((intent) => context.intents.includes(intent));
       const matchedTriggers = pattern.triggers.filter((trigger) => context.signals.includes(trigger));
       const styleBoost = context.style?.preferredEditingCategories.includes(pattern.category) ? 1 : 0;
-      const implementationBoost = pattern.implementation.status === "supported" ? 0.5 : 0;
-      const score =
-        matchedIntents.length * 3 +
-        matchedTriggers.length * 2 +
-        styleBoost +
-        implementationBoost -
-        pattern.densityCost * 0.1;
+      const rendererBoost = supported.has(pattern.id) ? 0.75 : 0;
+      const score = matchedIntents.length * 3 + matchedTriggers.length * 2 + styleBoost + rendererBoost - pattern.densityCost * 0.1;
       const reasons = [
         ...matchedIntents.map((value) => `intent:${value}`),
         ...matchedTriggers.map((value) => `trigger:${value}`),
         ...(styleBoost ? [`style:${pattern.category}`] : []),
+        ...(rendererBoost ? ["renderer:supported"] : []),
       ];
       return { pattern, score, reasons };
     })

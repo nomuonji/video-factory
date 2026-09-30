@@ -1,0 +1,13 @@
+{
+  "assetProviders": {
+    "narration": "none"
+  },
+  "providers": {
+    "voicevox": {
+      "url": "http://127.0.0.1:50021",
+      "speaker": 3,
+      "speedScale": 1.05,
+      "intonationScale": 1
+    }
+  }
+}

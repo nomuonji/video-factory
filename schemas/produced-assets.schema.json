@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProducedAssets",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "capabilityId",
+      "uri",
+      "mediaType"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "requestId": {
+        "type": "string"
+      },
+      "capabilityId": {
+        "type": "string"
+      },
+      "uri": {
+        "type": "string"
+      },
+      "mediaType": {
+        "type": "string"
+      },
+      "sceneId": {
+        "type": "string"
+      },
+      "metadata": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "provenance": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "additionalProperties": false
+  }
+}

@@ -1,7 +1,10 @@
 node_modules/
 dist/
 output/
+outputs/
 artifacts/
+public/generated/
+productions/*/.generated/
 .env
 .env.*
 !.env.example

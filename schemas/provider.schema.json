@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AssetProviderDescriptor",
+  "type": "object",
+  "required": [
+    "id",
+    "capabilities",
+    "mode",
+    "availability",
+    "description",
+    "config"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "mode": {
+      "enum": [
+        "local-http",
+        "local-process",
+        "remote-http",
+        "internal"
+      ]
+    },
+    "availability": {
+      "enum": [
+        "optional",
+        "required"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": false
+}

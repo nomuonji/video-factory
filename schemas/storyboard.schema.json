@@ -46,6 +46,46 @@
           "scenePatternId": {
             "type": "string"
           },
+          "visual": {
+            "type": "object",
+            "properties": {
+              "headline": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              },
+              "labels": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              },
+              "assetRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "background": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          },
           "assetRequests": {
             "type": "array",
             "items": {

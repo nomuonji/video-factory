@@ -1,0 +1,80 @@
+{
+  "productionId": "oauth-60s",
+  "version": 1,
+  "styleProfileId": "shorts",
+  "durationSeconds": 60,
+  "operations": [
+    {
+      "id": "op1",
+      "sceneId": "s1",
+      "start": 0.6,
+      "end": 2.5,
+      "patternId": "VS-T11",
+      "target": "key_phrase",
+      "reason": "Hook contrast should be instantly readable.",
+      "intensity": "medium",
+      "params": {
+        "text": "パスワードを渡さない"
+      }
+    },
+    {
+      "id": "op2",
+      "sceneId": "s2",
+      "start": 6.4,
+      "end": 11.8,
+      "patternId": "VS-I01",
+      "target": "definition",
+      "reason": "OAuth is a new term and benefits from a compact definition card.",
+      "intensity": "low",
+      "params": {
+        "title": "OAuth",
+        "body": "アクセス権を委任する仕組み"
+      }
+    },
+    {
+      "id": "op3",
+      "sceneId": "s3",
+      "start": 18,
+      "end": 30,
+      "patternId": "VS-I03",
+      "target": "authorization_flow",
+      "reason": "The core explanation is an ordered four-step process.",
+      "intensity": "medium",
+      "params": {
+        "steps": [
+          "アプリ",
+          "認可",
+          "認可コード",
+          "トークン"
+        ]
+      }
+    },
+    {
+      "id": "op4",
+      "sceneId": "s3",
+      "start": 31,
+      "end": 34,
+      "patternId": "VS-R01",
+      "target": "flow",
+      "reason": "A small punch-in marks the token reveal.",
+      "intensity": "medium",
+      "params": {
+        "zoom": 1.08
+      }
+    },
+    {
+      "id": "op5",
+      "sceneId": "s4",
+      "start": 49,
+      "end": 58,
+      "patternId": "VS-C05",
+      "target": "takeaway",
+      "reason": "Finish with one memorable takeaway.",
+      "intensity": "low",
+      "params": {
+        "title": "覚えること",
+        "body": "パスワードではなく権限を渡す"
+      }
+    }
+  ]
+}

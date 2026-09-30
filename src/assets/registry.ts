@@ -8,6 +8,10 @@ export class AssetProviderRegistry {
     this.providers.set(provider.id, provider);
   }
 
+  get(id: string): AssetProvider | undefined {
+    return this.providers.get(id);
+  }
+
   list(capabilityId?: string): AssetProvider[] {
     return [...this.providers.values()]
       .filter((provider) => !capabilityId || provider.capabilities.includes(capabilityId))
@@ -21,6 +25,15 @@ export class AssetProviderRegistry {
   require(request: AssetRequest): AssetProvider {
     const provider = this.resolve(request)[0];
     if (!provider) throw new Error(`No provider can satisfy asset request ${request.id} (${request.capabilityId})`);
+    return provider;
+  }
+
+  requireById(id: string, request: AssetRequest): AssetProvider {
+    const provider = this.providers.get(id);
+    if (!provider) throw new Error(`Unknown asset provider: ${id}`);
+    if (!provider.capabilities.includes(request.capabilityId) || !provider.canHandle(request)) {
+      throw new Error(`Provider ${id} cannot satisfy ${request.id} (${request.capabilityId})`);
+    }
     return provider;
   }
 }

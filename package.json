@@ -1,6 +1,6 @@
 {
   "name": "video-factory",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -9,9 +9,24 @@
   "scripts": {
     "validate": "node tools/validate-catalog.mjs",
     "typecheck": "tsc --noEmit",
-    "check": "npm run validate && npm run typecheck"
+    "check": "npm run validate && npm run typecheck",
+    "assets": "tsx tools/materialize-assets.ts",
+    "prepare": "tsx tools/prepare-production.ts",
+    "render": "tsx tools/render-production.ts",
+    "studio": "remotion studio renderer/remotion/index.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.530",
+    "@remotion/media": "4.0.530",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.530"
   },
   "devDependencies": {
-    "typescript": "^5.9.2"
+    "@types/node": "22.20.0",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
   }
 }

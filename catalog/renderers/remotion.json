@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "renderer": "remotion",
+  "default": true,
+  "description": "General-purpose CSS/React renderer for generated and hybrid YouTube-style videos.",
+  "patterns": {
+    "VS-T01": {
+      "status": "supported",
+      "component": "caption"
+    },
+    "VS-T04": {
+      "status": "supported",
+      "component": "tsukkomi"
+    },
+    "VS-T10": {
+      "status": "supported",
+      "component": "annotation"
+    },
+    "VS-T11": {
+      "status": "supported",
+      "component": "phrase-emphasis"
+    },
+    "VS-T13": {
+      "status": "partial",
+      "component": "caption",
+      "note": "Word timing is accepted when provided; otherwise falls back to phrase timing."
+    },
+    "VS-T14": {
+      "status": "supported",
+      "component": "editor-comment"
+    },
+    "VS-R01": {
+      "status": "supported",
+      "component": "camera-punch-in"
+    },
+    "VS-R03": {
+      "status": "supported",
+      "component": "darken-zoom"
+    },
+    "VS-R08": {
+      "status": "supported",
+      "component": "screen-shake"
+    },
+    "VS-R09": {
+      "status": "supported",
+      "component": "monochrome"
+    },
+    "VS-I01": {
+      "status": "supported",
+      "component": "definition-card"
+    },
+    "VS-I02": {
+      "status": "supported",
+      "component": "comparison"
+    },
+    "VS-I03": {
+      "status": "supported",
+      "component": "step-diagram"
+    },
+    "VS-I05": {
+      "status": "supported",
+      "component": "big-number"
+    },
+    "VS-I08": {
+      "status": "supported",
+      "component": "timeline"
+    },
+    "VS-I12": {
+      "status": "supported",
+      "component": "quote-card"
+    },
+    "VS-I13": {
+      "status": "supported",
+      "component": "bullet-summary"
+    },
+    "VS-I14": {
+      "status": "supported",
+      "component": "source-condition"
+    },
+    "VS-E04": {
+      "status": "supported",
+      "component": "chapter-card"
+    },
+    "VS-E06": {
+      "status": "supported",
+      "component": "fade"
+    },
+    "VS-E08": {
+      "status": "supported",
+      "component": "time-card"
+    },
+    "VS-G01": {
+      "status": "supported",
+      "component": "rules-card"
+    },
+    "VS-G05": {
+      "status": "supported",
+      "component": "result-reveal"
+    },
+    "VS-B02": {
+      "status": "supported",
+      "component": "topic-header"
+    },
+    "VS-B03": {
+      "status": "supported",
+      "component": "lower-third"
+    },
+    "VS-C02": {
+      "status": "supported",
+      "component": "question-tease"
+    },
+    "VS-C05": {
+      "status": "supported",
+      "component": "recap"
+    },
+    "VS-C06": {
+      "status": "supported",
+      "component": "end-screen"
+    },
+    "VS-S01": {
+      "status": "supported",
+      "component": "safe-layout"
+    },
+    "VS-S02": {
+      "status": "supported",
+      "component": "caption"
+    }
+  }
+}
