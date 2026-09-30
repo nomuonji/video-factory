@@ -1,4 +1,4 @@
-import type { EditOperation, ProducedAssetRecord, StoryboardScene } from "../../src/core/types.js";
+import type { EditOperation, ProducedAssetRecord, StoryboardScene } from "../../src/core/types.ts";
 
 export interface RenderScene extends StoryboardScene {
   startSeconds: number;

@@ -14,7 +14,8 @@
       "ES2022",
       "DOM"
     ],
-    "outDir": "dist"
+    "outDir": "dist",
+    "allowImportingTsExtensions": true
   },
   "include": [
     "src/**/*.ts",

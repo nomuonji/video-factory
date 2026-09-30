@@ -11,8 +11,8 @@ import {
   useVideoConfig,
 } from "remotion";
 import type { CSSProperties, ReactNode } from "react";
-import type { EditOperation, ProducedAssetRecord, StoryboardVisual } from "../../src/core/types.js";
-import type { RenderScene, RenderSpec } from "./types.js";
+import type { EditOperation, ProducedAssetRecord, StoryboardVisual } from "../../src/core/types.ts";
+import type { RenderScene, RenderSpec } from "./types.ts";
 
 const palette = {
   bg: "#0b1020",
