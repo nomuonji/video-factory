@@ -9,9 +9,17 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
     "outDir": "dist"
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "renderer/**/*.ts",
+    "renderer/**/*.tsx",
+    "tools/**/*.ts"
   ]
 }

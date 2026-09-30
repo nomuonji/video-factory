@@ -23,10 +23,7 @@ export interface EditingPattern {
   requirements: string[];
   intensity: Intensity;
   densityCost: number;
-  compatibility: {
-    pairsWellWith: string[];
-    avoidWith: string[];
-  };
+  compatibility: { pairsWellWith: string[]; avoidWith: string[] };
   implementation: PatternImplementation;
   sourceRef: string;
 }
@@ -62,6 +59,55 @@ export interface StyleProfile {
   preferredEditingCategories: string[];
 }
 
+export interface ProductionBrief {
+  id: string;
+  title: string;
+  goal: string;
+  audience: string;
+  durationTargetSeconds: number;
+  format: "landscape" | "vertical" | "square";
+  language: string;
+  inputMode: InputMode;
+  prompt: string;
+  styleProfileId: string;
+  sourceAssets?: Array<Record<string, unknown>>;
+  constraints: Record<string, unknown>;
+}
+
+export interface StoryboardVisual {
+  headline?: string;
+  body?: string;
+  labels?: string[];
+  steps?: string[];
+  items?: Array<Record<string, unknown>>;
+  assetRefs?: string[];
+  background?: string;
+  [key: string]: unknown;
+}
+
+export interface AssetRequestSpec {
+  capabilityId: string;
+  brief: string;
+  [key: string]: unknown;
+}
+
+export interface StoryboardScene {
+  id: string;
+  purpose: string;
+  durationSeconds: number;
+  narration: string;
+  scenePatternId: string;
+  visual?: StoryboardVisual;
+  assetRequests: AssetRequestSpec[];
+  editingIntents: string[];
+}
+
+export interface Storyboard {
+  productionId: string;
+  version: number;
+  scenes: StoryboardScene[];
+}
+
 export interface EditOperation {
   id: string;
   sceneId: string;
@@ -80,4 +126,14 @@ export interface EditPlan {
   styleProfileId: string;
   durationSeconds: number;
   operations: EditOperation[];
+}
+
+export interface ProducedAssetRecord {
+  id: string;
+  capabilityId: string;
+  uri: string;
+  mediaType: string;
+  sceneId?: string;
+  metadata?: Record<string, unknown>;
+  provenance?: Record<string, unknown>;
 }

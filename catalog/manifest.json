@@ -2,17 +2,20 @@
   "schemaVersion": 1,
   "defaults": {
     "inputMode": "generated",
-    "styleProfileId": "youtube-standard"
+    "styleProfileId": "youtube-standard",
+    "rendererId": "remotion"
   },
   "catalogs": {
     "editing": "catalog/editing/patterns.json",
     "scenes": "catalog/scenes/scenes.json",
     "assets": "catalog/assets/assets.json",
-    "styles": "catalog/styles/styles.json"
+    "styles": "catalog/styles/styles.json",
+    "renderers": "catalog/renderers"
   },
   "extensionPoints": {
     "assetProviders": "src/assets/provider.ts",
     "assetProviderRegistry": "src/assets/registry.ts",
-    "rendererAdapters": "src/adapters/types.ts"
+    "rendererAdapters": "src/adapters/types.ts",
+    "rendererSupportCatalogs": "catalog/renderers"
   }
 }
