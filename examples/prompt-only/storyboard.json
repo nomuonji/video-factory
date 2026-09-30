@@ -1,0 +1,90 @@
+{
+  "productionId": "oauth-60s",
+  "version": 1,
+  "scenes": [
+    {
+      "id": "s1",
+      "purpose": "hook",
+      "durationSeconds": 6,
+      "narration": "パスワードを渡さずに、別のサービスへ権限だけ渡す仕組み。それがOAuthです。",
+      "scenePatternId": "kinetic-typography",
+      "assetRequests": [
+        {
+          "capabilityId": "narration",
+          "brief": "Japanese narration"
+        },
+        {
+          "capabilityId": "subtitle",
+          "brief": "Timed short-form captions"
+        }
+      ],
+      "editingIntents": [
+        "hook",
+        "emphasis"
+      ]
+    },
+    {
+      "id": "s2",
+      "purpose": "define",
+      "durationSeconds": 10,
+      "narration": "OAuthはログイン方式そのものではなく、アクセス権を委任するための仕組みです。",
+      "scenePatternId": "definition-card",
+      "assetRequests": [
+        {
+          "capabilityId": "narration",
+          "brief": "Continue narration"
+        },
+        {
+          "capabilityId": "subtitle",
+          "brief": "Definition text"
+        }
+      ],
+      "editingIntents": [
+        "definition",
+        "clarity"
+      ]
+    },
+    {
+      "id": "s3",
+      "purpose": "explain-flow",
+      "durationSeconds": 30,
+      "narration": "アプリから認可画面へ進み、許可すると認可コードが返り、それを使ってアクセストークンを受け取ります。",
+      "scenePatternId": "narrated-diagram",
+      "assetRequests": [
+        {
+          "capabilityId": "diagram",
+          "brief": "App → authorization server → authorization code → access token"
+        },
+        {
+          "capabilityId": "narration",
+          "brief": "Continue narration"
+        }
+      ],
+      "editingIntents": [
+        "process",
+        "explanation"
+      ]
+    },
+    {
+      "id": "s4",
+      "purpose": "recap",
+      "durationSeconds": 14,
+      "narration": "覚えるのは、パスワードではなく権限を渡すこと。まずはここだけで十分です。",
+      "scenePatternId": "outro",
+      "assetRequests": [
+        {
+          "capabilityId": "narration",
+          "brief": "Closing narration"
+        },
+        {
+          "capabilityId": "subtitle",
+          "brief": "One-line takeaway"
+        }
+      ],
+      "editingIntents": [
+        "summary",
+        "memory"
+      ]
+    }
+  ]
+}

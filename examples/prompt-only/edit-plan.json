@@ -1,0 +1,67 @@
+{
+  "productionId": "oauth-60s",
+  "version": 1,
+  "styleProfileId": "shorts",
+  "durationSeconds": 60,
+  "operations": [
+    {
+      "id": "op1",
+      "sceneId": "s1",
+      "start": 0,
+      "end": 2.2,
+      "patternId": "VS-T11",
+      "target": "key_phrase",
+      "reason": "The hook hinges on the contrast of not handing over a password.",
+      "intensity": "medium",
+      "params": {
+        "text": "パスワードを渡さない"
+      }
+    },
+    {
+      "id": "op2",
+      "sceneId": "s2",
+      "start": 6,
+      "end": 12,
+      "patternId": "VS-I01",
+      "target": "definition",
+      "reason": "OAuth is introduced as a new term and needs a compact definition.",
+      "intensity": "low",
+      "params": {
+        "title": "OAuth",
+        "body": "アクセス権を委任する仕組み"
+      }
+    },
+    {
+      "id": "op3",
+      "sceneId": "s3",
+      "start": 16,
+      "end": 42,
+      "patternId": "VS-I03",
+      "target": "authorization_flow",
+      "reason": "The core explanation is an ordered process.",
+      "intensity": "medium",
+      "params": {
+        "steps": [
+          "アプリ",
+          "認可",
+          "認可コード",
+          "アクセストークン"
+        ]
+      }
+    },
+    {
+      "id": "op4",
+      "sceneId": "s4",
+      "start": 48,
+      "end": 58,
+      "patternId": "VS-C05",
+      "target": "takeaway",
+      "reason": "A final recap reinforces the one concept the viewer should remember.",
+      "intensity": "low",
+      "params": {
+        "title": "覚えること",
+        "body": "パスワードではなく権限を渡す"
+      }
+    }
+  ]
+}
