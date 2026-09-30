@@ -1,20 +1,21 @@
 import React from "react";
+import { Audio } from "@remotion/media";
 import {
   AbsoluteFill,
   Sequence,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
 import type { CSSProperties, ReactNode } from "react";
-import type { EditOperation, StoryboardVisual } from "../../src/core/types.js";
+import type { EditOperation, ProducedAssetRecord, StoryboardVisual } from "../../src/core/types.js";
 import type { RenderScene, RenderSpec } from "./types.js";
 
 const palette = {
   bg: "#0b1020",
   panel: "rgba(17, 24, 39, 0.88)",
-  panel2: "rgba(30, 41, 59, 0.9)",
   text: "#f8fafc",
   muted: "#cbd5e1",
   accent: "#7dd3fc",
@@ -45,9 +46,9 @@ const Card: React.FC<{ children: ReactNode; style?: CSSProperties }> = ({ childr
 );
 
 const SceneContent: React.FC<{ scene: RenderScene; operations: EditOperation[] }> = ({ scene, operations }) => {
-  const { width, height } = useVideoConfig();
+  const { width, height, fps } = useVideoConfig();
   const frame = useCurrentFrame();
-  const enter = spring({ frame, fps: 30, config: { damping: 18, stiffness: 120 } });
+  const enter = spring({ frame, fps, config: { damping: 18, stiffness: 120 } });
   const visual: StoryboardVisual = scene.visual ?? {};
   const headline = typeof visual.headline === "string" ? visual.headline : scene.purpose;
   const body = typeof visual.body === "string" ? visual.body : scene.narration;
@@ -271,6 +272,30 @@ const SceneSequence: React.FC<{ scene: RenderScene; operations: EditOperation[] 
   );
 };
 
+const assetSource = (asset: ProducedAssetRecord): string =>
+  /^https?:\/\//i.test(asset.uri) ? asset.uri : staticFile(asset.uri.replace(/^\/+/, ""));
+
+const NarrationTracks: React.FC<{ spec: RenderSpec }> = ({ spec }) => {
+  const { fps } = useVideoConfig();
+  return (
+    <>
+      {spec.assets
+        .filter((asset) => asset.capabilityId === "narration" && Boolean(asset.sceneId))
+        .map((asset) => {
+          const scene = spec.scenes.find((item) => item.id === asset.sceneId);
+          if (!scene) return null;
+          const from = Math.round(scene.startSeconds * fps);
+          const durationInFrames = Math.max(1, Math.round((scene.endSeconds - scene.startSeconds) * fps));
+          return (
+            <Sequence key={asset.id} from={from} durationInFrames={durationInFrames}>
+              <Audio src={assetSource(asset)} />
+            </Sequence>
+          );
+        })}
+    </>
+  );
+};
+
 export const Video: React.FC<RenderSpec> = (spec) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -286,7 +311,12 @@ export const Video: React.FC<RenderSpec> = (spec) => {
   if (punch || darkZoom) {
     const op = punch ?? darkZoom!;
     const local = Math.max(0, seconds - op.start);
-    scale = interpolate(local, [0, Math.min(0.22, (op.end-op.start)/2), Math.max(0.23, op.end-op.start)], [1, Number(op.params.zoom ?? 1.12), Number(op.params.zoom ?? 1.12)], { extrapolateRight: "clamp" });
+    scale = interpolate(
+      local,
+      [0, Math.min(0.22, (op.end - op.start) / 2), Math.max(0.23, op.end - op.start)],
+      [1, Number(op.params.zoom ?? 1.12), Number(op.params.zoom ?? 1.12)],
+      { extrapolateRight: "clamp" },
+    );
   }
   const shakeX = shake ? Math.sin(frame * 2.7) * Number(shake.params.intensity ?? 10) : 0;
   const shakeY = shake ? Math.cos(frame * 3.1) * Number(shake.params.intensity ?? 7) : 0;
@@ -310,22 +340,28 @@ export const Video: React.FC<RenderSpec> = (spec) => {
         );
       })}
 
-      {spec.operations.filter((op)=>op.patternId==="VS-E06").map((operation)=>{
-        const from=Math.round(operation.start*fps);
-        const durationInFrames=Math.max(1,Math.round((operation.end-operation.start)*fps));
+      {spec.operations.filter((op) => op.patternId === "VS-E06").map((operation) => {
+        const from = Math.round(operation.start * fps);
+        const durationInFrames = Math.max(1, Math.round((operation.end - operation.start) * fps));
         return (
           <Sequence key={operation.id} from={from} durationInFrames={durationInFrames}>
             <FadeOverlay durationInFrames={durationInFrames} />
           </Sequence>
         );
       })}
+
+      <NarrationTracks spec={spec} />
     </AbsoluteFill>
   );
 };
 
-const FadeOverlay: React.FC = () => {
+const FadeOverlay: React.FC<{ durationInFrames: number }> = ({ durationInFrames }) => {
   const frame = useCurrentFrame();
-  const { durationInFrames } = useVideoConfig();
-  const opacity = interpolate(frame, [0, Math.max(1, durationInFrames - 1)], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const opacity = interpolate(
+    frame,
+    [0, Math.max(1, durationInFrames - 1)],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+  );
   return <AbsoluteFill style={{ background: "#000", opacity }} />;
 };

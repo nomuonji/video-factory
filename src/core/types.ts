@@ -130,6 +130,7 @@ export interface EditPlan {
 
 export interface ProducedAssetRecord {
   id: string;
+  requestId?: string;
   capabilityId: string;
   uri: string;
   mediaType: string;

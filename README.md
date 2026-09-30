@@ -2,18 +2,24 @@
 
 Agent-native video production orchestration for generating complete videos from a prompt, optional source material, or both.
 
-## Current runnable path
+## Runnable path
 
 ```bash
 npm install
 npm run render -- oauth-60s
 ```
 
-This prepares the prompt-only example, applies editing guardrails, filters operations through the default Remotion capability catalog, and renders `outputs/oauth-60s.mp4`.
-
 The default input mode is **generated**: filmed source footage is not required.
 
-See `docs/production-runner.md` for the production folder contract.
+`render` runs:
+
+```text
+asset materialization → guardrails / prepare → Remotion → MP4
+```
+
+The included OAuth example keeps narration disabled so it renders without a local TTS engine. Set `assetProviders.narration` to `voicevox` in its `production.config.json` to generate Japanese narration through a local VOICEVOX engine.
+
+See `docs/production-runner.md` for the production contract and provider configuration.
 
 ## Architecture
 
@@ -21,6 +27,8 @@ See `docs/production-runner.md` for the production folder contract.
 Prompt / raw footage / references
         ↓
 Brief → Storyboard → Asset Requests → Edit Plan
+        ↓
+Asset Provider Registry
         ↓
 Style guardrails + renderer capability negotiation
         ↓
@@ -31,7 +39,7 @@ Remotion (default) / Animation Factory (specialized)
 MP4
 ```
 
-Catalogs remain independent:
+Catalogs are independent:
 
 - `catalog/editing/`: editorial vocabulary (92 patterns)
 - `catalog/scenes/`: reusable scene strategies

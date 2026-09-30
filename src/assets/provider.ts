@@ -5,11 +5,22 @@ export interface AssetRequest {
   inputs: Record<string, unknown>;
 }
 
+export interface AssetProviderContext {
+  productionId: string;
+  sceneId?: string;
+  rootDir: string;
+  publicDir: string;
+  outputDir: string;
+  providerConfig: Record<string, unknown>;
+}
+
 export interface ProducedAsset {
+  id: string;
   requestId: string;
   capabilityId: string;
   uri: string;
   mediaType: string;
+  sceneId?: string;
   metadata: Record<string, unknown>;
   provenance: {
     providerId: string;
@@ -23,5 +34,5 @@ export interface AssetProvider {
   capabilities: string[];
   priority?: number;
   canHandle(request: AssetRequest): boolean;
-  produce(request: AssetRequest): Promise<ProducedAsset>;
+  produce(request: AssetRequest, context: AssetProviderContext): Promise<ProducedAsset>;
 }
