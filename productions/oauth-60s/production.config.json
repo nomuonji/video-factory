@@ -1,6 +1,6 @@
 {
   "assetProviders": {
-    "narration": "none"
+    "narration": "voicevox"
   },
   "providers": {
     "voicevox": {

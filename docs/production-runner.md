@@ -17,7 +17,7 @@ resolve + validate production ID
                     ↓
 validate production files
                     ↓
-Node 22 + Noto CJK
+Node 22 + Noto CJK + conditional VOICEVOX runtime
                     ↓
 npm install
                     ↓
@@ -68,6 +68,7 @@ The uploaded artifact contains:
 - `render-report.json`
 - `run-metadata.json`
 - the production JSON files used for that run
+- generated narration assets when a narration provider is enabled
 
 ## Production folder
 
@@ -132,9 +133,9 @@ Enable VOICEVOX in an environment where VOICEVOX Engine is running:
 
 You can also set `VOICEVOX_URL` and `VOICEVOX_SPEAKER`.
 
-Each Storyboard scene requesting `narration` becomes one WAV file under `public/generated/<production-id>/`. `assets.json` links it back to the scene, and Remotion places the audio at the scene start.
+Each Storyboard scene requesting `narration` becomes one WAV file under `public/generated/<production-id>/`. `assets.json` records measured duration, scene fill ratio, VOICEVOX speaker/style, and attribution. Remotion places audio at the scene start and displays voice attribution during the final seconds.
 
-The current GitHub Actions workflow does not start VOICEVOX Engine automatically. Productions with `narration: none` render immediately; VOICEVOX-on-Actions should be added as a separate provider/runtime step rather than hard-wired into the renderer.
+`render-video.yml` automatically starts the official pinned `ghcr.io/voicevox/voicevox_engine:cpu-0.25.2` container only when the production selects `assetProviders.narration: voicevox`. It waits for the API, validates the configured speaker/style ID, generates narration WAV files, and stops the container after rendering. Productions with `narration: none` skip the VOICEVOX runtime.
 
 ## Local render
 

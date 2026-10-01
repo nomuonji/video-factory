@@ -334,6 +334,46 @@ const NarrationTracks: React.FC<{ spec: RenderSpec }> = ({ spec }) => {
   );
 };
 
+
+const VoiceCredits: React.FC<{ spec: RenderSpec }> = ({ spec }) => {
+  const { fps, height } = useVideoConfig();
+  const credits = [...new Set(
+    spec.assets
+      .filter((asset) => asset.capabilityId === "narration")
+      .map((asset) => asset.metadata?.attribution)
+      .filter((value): value is string => typeof value === "string" && value.length > 0),
+  )];
+  if (!credits.length) return null;
+
+  const durationSeconds = Math.min(4, spec.durationSeconds);
+  const from = Math.max(0, Math.round((spec.durationSeconds - durationSeconds) * fps));
+  const durationInFrames = Math.max(1, Math.round(durationSeconds * fps));
+
+  return (
+    <Sequence from={from} durationInFrames={durationInFrames}>
+      <AbsoluteFill
+        style={{
+          justifyContent: "flex-end",
+          alignItems: "flex-end",
+          padding: Math.round(height * 0.025),
+          pointerEvents: "none",
+        }}
+      >
+        <div
+          style={{
+            ...baseFont,
+            fontSize: Math.max(16, height * 0.018),
+            color: "rgba(248,250,252,.72)",
+            textShadow: "0 2px 8px rgba(0,0,0,.8)",
+          }}
+        >
+          {credits.join(" / ")}
+        </div>
+      </AbsoluteFill>
+    </Sequence>
+  );
+};
+
 export const Video: React.FC<RenderSpec> = (spec) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -389,6 +429,7 @@ export const Video: React.FC<RenderSpec> = (spec) => {
       })}
 
       <NarrationTracks spec={spec} />
+      <VoiceCredits spec={spec} />
     </AbsoluteFill>
   );
 };

@@ -64,6 +64,9 @@ gh workflow run render-video.yml -f production_id=<production_id>
 - Preserve provenance and licensing metadata for external media.
 - Do not commit credentials, API keys, generated secrets, or private source media.
 - The default general-purpose renderer is Remotion. Use Animation Factory when the production intentionally needs its pixel-art/character runtime.
+- For Japanese productions that request narration, prefer `assetProviders.narration: voicevox` unless the user explicitly wants a silent video. GitHub Actions starts the VOICEVOX runtime automatically.
+- Author narration to fit each scene's time budget. Treat narration filling less than roughly 55% of a scene as a pacing defect unless silence is intentional; narration longer than the scene will be clipped.
+- Preserve generated voice attribution. VOICEVOX narration assets carry attribution metadata and the Remotion renderer displays it near the end of the video.
 
 ## Extending
 

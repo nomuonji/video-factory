@@ -31,7 +31,7 @@ Only Issues opened by the repository owner are accepted. On success, the workflo
 
 Ordinary pushes do not render videos, so repository edits do not automatically spend rendering minutes.
 
-The workflow validates catalogs and TypeScript, installs Japanese fonts, renders through Remotion, and uploads the MP4 plus its render report and source production JSON. Artifacts are retained for 7 days.
+The workflow validates catalogs and TypeScript, installs Japanese fonts, conditionally boots VOICEVOX for narrated productions, renders through Remotion, and uploads the MP4 plus its render report, production JSON, and generated narration assets. Artifacts are retained for 7 days.
 
 For local development:
 
@@ -48,7 +48,7 @@ The default input mode is **generated**: filmed source footage is not required.
 asset materialization → guardrails / prepare → Remotion → MP4
 ```
 
-The included OAuth example keeps narration disabled so it renders without a TTS engine. Set `assetProviders.narration` to `voicevox` in `production.config.json` when rendering in an environment where VOICEVOX Engine is running.
+The included OAuth example uses VOICEVOX narration. GitHub Actions automatically boots the pinned CPU engine when `assetProviders.narration` is `voicevox`; silent productions can explicitly use `none`.
 
 See `docs/production-runner.md` for the production contract and provider configuration.
 
