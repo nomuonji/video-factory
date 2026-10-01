@@ -50,7 +50,7 @@ const Card: React.FC<{ children: ReactNode; style?: CSSProperties }> = ({ childr
 const SceneMedia: React.FC<{ scene: RenderScene; assets: ProducedAssetRecord[] }> = ({ scene, assets }) => {
   const media = assets.find((asset) =>
     asset.sceneId === scene.id
-    && ["image", "illustration", "generated-video", "screen_capture", "document_capture"].includes(asset.capabilityId),
+    && ["image", "illustration", "generated-video", "screen_capture", "document_capture", "icon", "diagram", "chart", "map", "character", "code_render"].includes(asset.capabilityId),
   );
   if (!media) return null;
 
@@ -335,6 +335,105 @@ const NarrationTracks: React.FC<{ spec: RenderSpec }> = ({ spec }) => {
 };
 
 
+type SubtitleSegment = { start: number; end: number; text: string };
+
+const SubtitleAsset: React.FC<{ asset: ProducedAssetRecord }> = ({ asset }) => {
+  const frame = useCurrentFrame();
+  const { fps, width, height } = useVideoConfig();
+  const raw = asset.metadata?.segments;
+  if (!Array.isArray(raw)) return null;
+
+  const segments = raw.filter((item): item is SubtitleSegment => {
+    if (!item || typeof item !== "object") return false;
+    const rec = item as Record<string, unknown>;
+    return Number.isFinite(Number(rec.start))
+      && Number.isFinite(Number(rec.end))
+      && typeof rec.text === "string";
+  });
+  const second = frame / fps;
+  const active = segments.find((segment) => second >= Number(segment.start) && second < Number(segment.end));
+  if (!active) return null;
+
+  return (
+    <AbsoluteFill
+      style={{
+        justifyContent: "flex-end",
+        alignItems: "center",
+        padding: Math.round(height * 0.055),
+        pointerEvents: "none",
+      }}
+    >
+      <div
+        style={{
+          ...baseFont,
+          maxWidth: width * 0.88,
+          background: "rgba(0,0,0,.72)",
+          borderRadius: 18,
+          padding: "16px 24px",
+          fontSize: Math.max(22, height * 0.03),
+          fontWeight: 800,
+          lineHeight: 1.35,
+          textAlign: "center",
+          boxShadow: "0 12px 30px rgba(0,0,0,.25)",
+        }}
+      >
+        {active.text}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const SubtitleTracks: React.FC<{ spec: RenderSpec }> = ({ spec }) => {
+  const { fps } = useVideoConfig();
+  return (
+    <>
+      {spec.assets
+        .filter((asset) => asset.capabilityId === "subtitle" && Boolean(asset.sceneId))
+        .map((asset) => {
+          const scene = spec.scenes.find((item) => item.id === asset.sceneId);
+          if (!scene) return null;
+          const from = Math.round(scene.startSeconds * fps);
+          const durationInFrames = Math.max(1, Math.round((scene.endSeconds - scene.startSeconds) * fps));
+          return (
+            <Sequence key={asset.id} from={from} durationInFrames={durationInFrames}>
+              <SubtitleAsset asset={asset} />
+            </Sequence>
+          );
+        })}
+    </>
+  );
+};
+
+const SupportingAudioTracks: React.FC<{ spec: RenderSpec }> = ({ spec }) => {
+  const { fps } = useVideoConfig();
+  const supported = new Set(["music", "sfx", "ambient_audio"]);
+  return (
+    <>
+      {spec.assets
+        .filter((asset) => supported.has(asset.capabilityId) && Boolean(asset.sceneId))
+        .map((asset) => {
+          const scene = spec.scenes.find((item) => item.id === asset.sceneId);
+          if (!scene) return null;
+          const from = Math.round(scene.startSeconds * fps);
+          const durationInFrames = Math.max(1, Math.round((scene.endSeconds - scene.startSeconds) * fps));
+          const fallbackVolume = asset.capabilityId === "music"
+            ? 0.14
+            : asset.capabilityId === "ambient_audio"
+              ? 0.18
+              : 0.5;
+          const configuredVolume = Number(asset.metadata?.volume);
+          const volume = Number.isFinite(configuredVolume) ? configuredVolume : fallbackVolume;
+          return (
+            <Sequence key={asset.id} from={from} durationInFrames={durationInFrames}>
+              <Audio src={assetSource(asset)} volume={volume} />
+            </Sequence>
+          );
+        })}
+    </>
+  );
+};
+
+
 const VoiceCredits: React.FC<{ spec: RenderSpec }> = ({ spec }) => {
   const { fps, height } = useVideoConfig();
   const credits = [...new Set(
@@ -428,7 +527,9 @@ export const Video: React.FC<RenderSpec> = (spec) => {
         );
       })}
 
+      <SupportingAudioTracks spec={spec} />
       <NarrationTracks spec={spec} />
+      <SubtitleTracks spec={spec} />
       <VoiceCredits spec={spec} />
     </AbsoluteFill>
   );
