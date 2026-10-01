@@ -1,0 +1,23 @@
+{
+  "assetProviders": {
+    "narration": "none",
+    "subtitle": "procedural",
+    "image": "procedural",
+    "illustration": "procedural",
+    "icon": "procedural",
+    "diagram": "procedural",
+    "chart": "procedural",
+    "map": "procedural",
+    "character": "procedural",
+    "music": "procedural",
+    "sfx": "procedural",
+    "ambient_audio": "procedural",
+    "code_render": "procedural"
+  },
+  "providers": {
+    "procedural": {
+      "visualPreset": "auto",
+      "audioPreset": "auto"
+    }
+  }
+}
