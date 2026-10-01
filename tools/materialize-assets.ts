@@ -5,6 +5,7 @@ import type { ProductionBrief, ProducedAssetRecord, Storyboard } from "../src/co
 import type { AssetRequest, ProducedAsset } from "../src/assets/provider.js";
 import { AssetProviderRegistry } from "../src/assets/registry.js";
 import { voicevoxProvider } from "../src/assets/providers/voicevox.js";
+import { proceduralProvider } from "../src/assets/providers/procedural.js";
 
 interface ProductionConfig {
   assetProviders?: Record<string, string>;
@@ -36,6 +37,7 @@ const existing = await loadOptional<ProducedAssetRecord[]>("assets.json", []);
 
 const registry = new AssetProviderRegistry();
 registry.register(voicevoxProvider);
+registry.register(proceduralProvider);
 
 const generated: ProducedAsset[] = [];
 const publicDir = resolve(root, "public");
@@ -55,13 +57,22 @@ for (const scene of storyboard.scenes) {
       brief: spec.brief,
       inputs: {
         ...spec,
-        ...(spec.capabilityId === "narration"
-          ? {
-              text: scene.narration,
-              language: brief.language,
-              durationSeconds: scene.durationSeconds,
-            }
-          : {}),
+        productionId: brief.id,
+        productionTitle: brief.title,
+        format: brief.format,
+        language: brief.language,
+        styleProfileId: brief.styleProfileId,
+        purpose: scene.purpose,
+        scenePatternId: scene.scenePatternId,
+        durationSeconds: scene.durationSeconds,
+        narration: scene.narration,
+        text: scene.narration,
+        visual: scene.visual ?? {},
+        headline: scene.visual?.headline,
+        body: scene.visual?.body,
+        steps: scene.visual?.steps,
+        items: scene.visual?.items,
+        labels: scene.visual?.labels,
       },
     };
 

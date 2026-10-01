@@ -1,0 +1,187 @@
+{
+  "productionId": "asset-lab",
+  "version": 1,
+  "scenes": [
+    {
+      "id": "s1",
+      "purpose": "Background and icon",
+      "durationSeconds": 4,
+      "narration": "背景、アイコン、字幕、効果音。",
+      "scenePatternId": "generated-broll",
+      "visual": {
+        "headline": "BACKGROUND + ICON",
+        "body": "Procedural SVG / subtitle / SFX"
+      },
+      "assetRequests": [
+        {
+          "capabilityId": "image",
+          "brief": "Abstract midnight technology background"
+        },
+        {
+          "capabilityId": "icon",
+          "brief": "Security lock icon",
+          "concept": "lock"
+        },
+        {
+          "capabilityId": "subtitle",
+          "brief": "Timed captions"
+        },
+        {
+          "capabilityId": "sfx",
+          "brief": "Short pop impact",
+          "effect_intent": "pop"
+        }
+      ],
+      "editingIntents": [
+        "showcase"
+      ]
+    },
+    {
+      "id": "s2",
+      "purpose": "Illustration and character",
+      "durationSeconds": 4,
+      "narration": "イラスト、キャラクター、BGM。",
+      "scenePatternId": "generated-broll",
+      "visual": {
+        "headline": "ILLUSTRATION + CHARACTER",
+        "body": "Fallback editorial graphics"
+      },
+      "assetRequests": [
+        {
+          "capabilityId": "illustration",
+          "brief": "Abstract editorial illustration about an AI video factory"
+        },
+        {
+          "capabilityId": "character",
+          "brief": "Friendly factory guide character",
+          "character": "Factory Guide"
+        },
+        {
+          "capabilityId": "music",
+          "brief": "Calm technology explainer bed",
+          "mood": "calm-tech"
+        }
+      ],
+      "editingIntents": [
+        "showcase"
+      ]
+    },
+    {
+      "id": "s3",
+      "purpose": "Diagram and ambience",
+      "durationSeconds": 4,
+      "narration": "図解と環境音。",
+      "scenePatternId": "narrated-diagram",
+      "visual": {
+        "headline": "DIAGRAM",
+        "steps": [
+          "Brief",
+          "Assets",
+          "Edit",
+          "Render"
+        ],
+        "body": "Structured steps become SVG"
+      },
+      "assetRequests": [
+        {
+          "capabilityId": "diagram",
+          "brief": "Four-step production flow diagram"
+        },
+        {
+          "capabilityId": "ambient_audio",
+          "brief": "Subtle room tone",
+          "environment": "studio"
+        }
+      ],
+      "editingIntents": [
+        "process"
+      ]
+    },
+    {
+      "id": "s4",
+      "purpose": "Chart",
+      "durationSeconds": 4,
+      "narration": "数値データからチャート。",
+      "scenePatternId": "data-story",
+      "visual": {
+        "headline": "CHART",
+        "body": "Never invent values"
+      },
+      "assetRequests": [
+        {
+          "capabilityId": "chart",
+          "brief": "Render supplied numeric values only",
+          "data": [
+            {
+              "label": "A",
+              "value": 12
+            },
+            {
+              "label": "B",
+              "value": 27
+            },
+            {
+              "label": "C",
+              "value": 19
+            },
+            {
+              "label": "D",
+              "value": 34
+            }
+          ]
+        }
+      ],
+      "editingIntents": [
+        "data"
+      ]
+    },
+    {
+      "id": "s5",
+      "purpose": "Schematic route",
+      "durationSeconds": 4,
+      "narration": "地点列から簡易ルート図。",
+      "scenePatternId": "map-route",
+      "visual": {
+        "headline": "SCHEMATIC ROUTE",
+        "body": "Not a geographic map"
+      },
+      "assetRequests": [
+        {
+          "capabilityId": "map",
+          "brief": "Schematic route only",
+          "locations": [
+            "Idea",
+            "Plan",
+            "Assets",
+            "Render"
+          ]
+        }
+      ],
+      "editingIntents": [
+        "route"
+      ]
+    },
+    {
+      "id": "s6",
+      "purpose": "Code render",
+      "durationSeconds": 4,
+      "narration": "最後にコード表示。",
+      "scenePatternId": "definition-card",
+      "visual": {
+        "headline": "CODE RENDER",
+        "body": "Generated from supplied code"
+      },
+      "assetRequests": [
+        {
+          "capabilityId": "code_render",
+          "brief": "Render a short production snippet",
+          "language": "typescript",
+          "code": "const video = await factory.render({ prompt: 'OAuth', narration: 'voicevox' });"
+        }
+      ],
+      "editingIntents": [
+        "code"
+      ]
+    }
+  ]
+}

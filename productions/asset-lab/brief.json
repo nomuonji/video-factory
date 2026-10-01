@@ -1,0 +1,18 @@
+{
+  "id": "asset-lab",
+  "title": "Video Factory Asset Lab",
+  "goal": "Exercise the built-in procedural asset provider across common visual, text, and audio material types.",
+  "audience": "Video Factory maintainers and agents",
+  "durationTargetSeconds": 24,
+  "format": "vertical",
+  "language": "ja",
+  "inputMode": "generated",
+  "prompt": "Video Factoryの標準素材を一通り確認できる24秒のアセットショーケースを作る",
+  "styleProfileId": "shorts",
+  "sourceAssets": [],
+  "constraints": {
+    "noPaidAssets": true,
+    "noExternalMedia": true,
+    "diagnostic": true
+  }
+}

@@ -11,7 +11,9 @@
     "assets": "catalog/assets/assets.json",
     "styles": "catalog/styles/styles.json",
     "renderers": "catalog/renderers",
-    "providers": "catalog/providers/providers.json"
+    "providers": "catalog/providers/providers.json",
+    "assetPresets": "catalog/assets/presets.json",
+    "assetCoverage": "catalog/assets/coverage.json"
   },
   "extensionPoints": {
     "assetProviders": "src/assets/provider.ts",

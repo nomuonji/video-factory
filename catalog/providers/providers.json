@@ -39,6 +39,36 @@
           "default": 1
         }
       }
+    },
+    {
+      "id": "procedural",
+      "capabilities": [
+        "subtitle",
+        "image",
+        "illustration",
+        "icon",
+        "diagram",
+        "chart",
+        "map",
+        "character",
+        "music",
+        "sfx",
+        "ambient_audio",
+        "code_render"
+      ],
+      "mode": "internal",
+      "availability": "required",
+      "description": "Deterministic in-repo SVG/JSON/WAV generation for common video assets; no external API or media license dependency.",
+      "config": {
+        "visualPreset": {
+          "type": "string",
+          "default": "auto"
+        },
+        "audioPreset": {
+          "type": "string",
+          "default": "auto"
+        }
+      }
     }
   ]
 }
