@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "visualPresets": [
+    {
+      "id": "midnight-tech",
+      "useWhen": [
+        "software",
+        "technology",
+        "systems",
+        "finance"
+      ],
+      "description": "Dark gradient, cool cyan accents, restrained glow."
+    },
+    {
+      "id": "playful-pop",
+      "useWhen": [
+        "shorts",
+        "comedy",
+        "light_explainer"
+      ],
+      "description": "High-contrast rounded shapes and warm secondary accents."
+    },
+    {
+      "id": "clean-editorial",
+      "useWhen": [
+        "education",
+        "law",
+        "business",
+        "documentary"
+      ],
+      "description": "Calm structured cards with low visual noise."
+    },
+    {
+      "id": "schematic-route",
+      "useWhen": [
+        "journey",
+        "process",
+        "route"
+      ],
+      "description": "Non-geographic route diagram. Never substitutes for a real map."
+    },
+    {
+      "id": "data-bars",
+      "useWhen": [
+        "numeric_comparison"
+      ],
+      "description": "Bar chart generated only from supplied numeric data."
+    },
+    {
+      "id": "code-panel",
+      "useWhen": [
+        "programming",
+        "terminal",
+        "api"
+      ],
+      "description": "Monospace code surface generated from supplied code."
+    }
+  ],
+  "audioPresets": [
+    {
+      "id": "calm-tech",
+      "capability": "music",
+      "description": "Low-volume synthesized pad for explainers."
+    },
+    {
+      "id": "soft-uplift",
+      "capability": "music",
+      "description": "Simple major-feeling procedural bed for summaries/outros."
+    },
+    {
+      "id": "pop",
+      "capability": "sfx",
+      "description": "Short impact for reveals and emphasis."
+    },
+    {
+      "id": "whoosh",
+      "capability": "sfx",
+      "description": "Noise/sine sweep for movement and transitions."
+    },
+    {
+      "id": "chime",
+      "capability": "sfx",
+      "description": "Short harmonic success cue."
+    },
+    {
+      "id": "room-tone",
+      "capability": "ambient_audio",
+      "description": "Low-level deterministic noise bed."
+    }
+  ],
+  "iconConcepts": [
+    "lock",
+    "key",
+    "user",
+    "play",
+    "check",
+    "generic"
+  ],
+  "rules": [
+    "Charts require supplied numeric values; never invent chart data.",
+    "Procedural maps are schematic routes only and require at least two supplied locations.",
+    "Generated SVGs are fallback/editorial graphics, not factual depictions of real people, products, places, or documents.",
+    "Prefer real evidence assets for claims that depend on a specific interface, document, product, or location."
+  ]
+}
