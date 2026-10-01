@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "capabilities": [
+    {
+      "id": "narration",
+      "status": "supported",
+      "defaultProvider": "voicevox",
+      "notes": "Japanese narration via pinned VOICEVOX runtime in GitHub Actions."
+    },
+    {
+      "id": "subtitle",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Sentence-level timed JSON plus Remotion caption rendering."
+    },
+    {
+      "id": "image",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Abstract/editorial SVG fallback. Not a factual depiction of real-world subjects."
+    },
+    {
+      "id": "illustration",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Abstract/editorial SVG fallback."
+    },
+    {
+      "id": "icon",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Built-in simple vector concepts."
+    },
+    {
+      "id": "diagram",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Structured SVG from supplied steps/entities."
+    },
+    {
+      "id": "chart",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Requires supplied numeric data; provider refuses to invent values."
+    },
+    {
+      "id": "map",
+      "status": "partial",
+      "defaultProvider": "procedural",
+      "notes": "Schematic route only. Real geographic maps require a factual map provider or supplied asset."
+    },
+    {
+      "id": "character",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Abstract avatar fallback; not a likeness of a real person."
+    },
+    {
+      "id": "music",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Deterministic synthesized background bed."
+    },
+    {
+      "id": "sfx",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Procedural pop/whoosh/chime-style effects."
+    },
+    {
+      "id": "ambient_audio",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "Deterministic low-level ambience."
+    },
+    {
+      "id": "code_render",
+      "status": "supported",
+      "defaultProvider": "procedural",
+      "notes": "SVG code panel from supplied code."
+    },
+    {
+      "id": "generated-video",
+      "status": "fallback",
+      "defaultProvider": null,
+      "notes": "Use procedural stills plus renderer camera/motion patterns by default; plug in a true video generator when available."
+    },
+    {
+      "id": "screen_capture",
+      "status": "external_required",
+      "defaultProvider": null,
+      "notes": "Must capture the real referenced interface; do not procedurally fake evidence."
+    },
+    {
+      "id": "document_capture",
+      "status": "external_required",
+      "defaultProvider": null,
+      "notes": "Must derive from the real document/source; do not procedurally fake evidence."
+    }
+  ]
+}
