@@ -79,3 +79,18 @@ Catalogs are independent:
 - `catalog/renderers/`: renderer-specific support maps
 
 Agents should read `AGENTS.md` before authoring a production.
+
+
+## Built-in asset starter pack
+
+For prompt-only videos, the `procedural` provider can generate common fallback materials without an external API:
+
+- abstract/editorial images and illustrations
+- simple vector icons and characters
+- diagrams, numeric charts, schematic routes, and code panels
+- sentence-timed subtitles
+- synthesized music beds, sound effects, and ambience
+
+The provider is deliberately conservative. It will not fabricate chart values, real geographic maps, screenshots, documents, or factual depictions of real people/products/places. See `catalog/assets/coverage.json` and `catalog/assets/presets.json`.
+
+`productions/asset-lab/` is the regression/showcase production for the built-in material set.
