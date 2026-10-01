@@ -12,8 +12,9 @@ Turn a user brief into a reproducible video production. Prefer structured produc
 4. `catalog/scenes/scenes.json`
 5. `catalog/editing/patterns.json`
 6. `catalog/assets/assets.json`
-7. the selected renderer support map in `catalog/renderers/`
-8. the schemas relevant to the artifacts you are writing
+7. `catalog/assets/coverage.json` and `catalog/assets/presets.json`
+8. the selected renderer support map in `catalog/renderers/`
+9. the schemas relevant to the artifacts you are writing
 
 ## Default flow
 
@@ -67,6 +68,10 @@ gh workflow run render-video.yml -f production_id=<production_id>
 - For Japanese productions that request narration, prefer `assetProviders.narration: voicevox` unless the user explicitly wants a silent video. GitHub Actions starts the VOICEVOX runtime automatically.
 - Author narration to fit each scene's time budget. Treat narration filling less than roughly 55% of a scene as a pacing defect unless silence is intentional; narration longer than the scene will be clipped.
 - Preserve generated voice attribution. VOICEVOX narration assets carry attribution metadata and the Remotion renderer displays it near the end of the video.
+- Prefer the `procedural` provider for generic editorial visuals, subtitles, diagrams, icons, code panels, BGM, SFX, and ambience when no factual external asset is needed.
+- Never use procedural material as fake evidence. Real UI screenshots, documents, products, people, and geographic maps require real/supplied or evidence-producing providers.
+- Never invent values to satisfy a chart request. The procedural chart provider intentionally rejects requests without numeric data.
+- If true generated video is unavailable, use a procedural still plus cataloged camera/motion patterns rather than pretending a still is generated video.
 
 ## Extending
 
