@@ -1,6 +1,18 @@
 {
   "assetProviders": {
-    "narration": "voicevox"
+    "narration": "voicevox",
+    "subtitle": "procedural",
+    "image": "procedural",
+    "illustration": "procedural",
+    "diagram": "procedural",
+    "music": "procedural",
+    "sfx": "procedural",
+    "ambient_audio": "procedural",
+    "icon": "procedural",
+    "character": "procedural",
+    "chart": "procedural",
+    "map": "procedural",
+    "code_render": "procedural"
   },
   "providers": {
     "voicevox": {
@@ -8,6 +20,10 @@
       "speaker": 3,
       "speedScale": 1.05,
       "intonationScale": 1
+    },
+    "procedural": {
+      "visualPreset": "auto",
+      "audioPreset": "auto"
     }
   }
 }
