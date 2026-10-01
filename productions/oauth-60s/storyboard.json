@@ -6,7 +6,7 @@
       "id": "s1",
       "purpose": "hook",
       "durationSeconds": 6,
-      "narration": "OAuthは、パスワードを渡さず、必要な権限だけを相手に渡す仕組みです。",
+      "narration": "OAuthは、パスワードを渡さず、権限だけを相手に渡す仕組みです。",
       "scenePatternId": "kinetic-typography",
       "visual": {
         "headline": "パスワードを渡さずに\n権限だけ渡す",
@@ -31,7 +31,7 @@
       "id": "s2",
       "purpose": "OAuthとは",
       "durationSeconds": 10,
-      "narration": "たとえば写真アプリにGoogleのパスワードを教えず、画像を読む権限だけ許可できます。OAuthはログインではなく、権限の委任です。",
+      "narration": "写真アプリにGoogleのパスワードを教えず、画像を読む権限だけ許可できます。OAuthはログインではなく、権限の委任です。",
       "scenePatternId": "definition-card",
       "visual": {
         "headline": "OAuth",
