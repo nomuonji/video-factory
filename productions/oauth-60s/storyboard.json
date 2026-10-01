@@ -20,6 +20,15 @@
         {
           "capabilityId": "subtitle",
           "brief": "Timed captions"
+        },
+        {
+          "capabilityId": "image",
+          "brief": "Abstract secure authorization background; no logos or factual UI"
+        },
+        {
+          "capabilityId": "sfx",
+          "brief": "Soft pop impact on the OAuth hook",
+          "effect_intent": "pop"
         }
       ],
       "editingIntents": [
@@ -41,6 +50,14 @@
         {
           "capabilityId": "narration",
           "brief": "Continue narration"
+        },
+        {
+          "capabilityId": "subtitle",
+          "brief": "Timed Japanese captions from the scene narration"
+        },
+        {
+          "capabilityId": "illustration",
+          "brief": "Abstract delegated-access illustration with a lock and permission concept"
         }
       ],
       "editingIntents": [
@@ -72,6 +89,10 @@
         {
           "capabilityId": "narration",
           "brief": "Continue narration"
+        },
+        {
+          "capabilityId": "subtitle",
+          "brief": "Timed Japanese captions from the scene narration"
         }
       ],
       "editingIntents": [
@@ -93,6 +114,15 @@
         {
           "capabilityId": "narration",
           "brief": "Closing narration"
+        },
+        {
+          "capabilityId": "subtitle",
+          "brief": "Timed Japanese captions from the scene narration"
+        },
+        {
+          "capabilityId": "music",
+          "brief": "Subtle optimistic explainer outro bed",
+          "mood": "soft-uplift"
         }
       ],
       "editingIntents": [
