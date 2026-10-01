@@ -31,7 +31,7 @@ jobs:
         startsWith(github.event.issue.title, '[render-video] ')
       )
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Resolve production ID
@@ -93,9 +93,101 @@ jobs:
         shell: bash
         run: npm run check
 
+      - name: Detect runtime needs
+        id: runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+
+          const configPath = path.join("productions", process.env.PRODUCTION_ID, "production.config.json");
+          const config = fs.existsSync(configPath)
+            ? JSON.parse(fs.readFileSync(configPath, "utf8"))
+            : {};
+
+          const needsVoicevox = config.assetProviders?.narration === "voicevox";
+          const rawSpeaker = config.providers?.voicevox?.speaker ?? 3;
+          const speaker = Number(rawSpeaker);
+
+          if (needsVoicevox && !Number.isFinite(speaker)) {
+            throw new Error("Invalid VOICEVOX speaker: " + rawSpeaker);
+          }
+
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, "voicevox=" + needsVoicevox + "\n");
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, "voicevox_speaker=" + speaker + "\n");
+          console.log("VOICEVOX required: " + needsVoicevox + "; speaker: " + speaker);
+          NODE
+
+      - name: Start VOICEVOX Engine
+        if: steps.runtime.outputs.voicevox == 'true'
+        timeout-minutes: 15
+        shell: bash
+        env:
+          VOICEVOX_IMAGE: ghcr.io/voicevox/voicevox_engine:cpu-0.25.2
+          VOICEVOX_SPEAKER: ${{ steps.runtime.outputs.voicevox_speaker }}
+        run: |
+          set -euo pipefail
+
+          docker pull "$VOICEVOX_IMAGE"
+          docker run --rm -d --name voicevox-engine -p 127.0.0.1:50021:50021 "$VOICEVOX_IMAGE"
+
+          ready=0
+          for attempt in $(seq 1 180); do
+            if curl -fsS http://127.0.0.1:50021/version > "$RUNNER_TEMP/voicevox-version.json" 2>/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 2
+          done
+
+          if [[ "$ready" != "1" ]]; then
+            echo "::error::VOICEVOX Engine did not become ready"
+            docker logs voicevox-engine || true
+            exit 1
+          fi
+
+          curl -fsS http://127.0.0.1:50021/speakers > "$RUNNER_TEMP/voicevox-speakers.json"
+
+          node - "$VOICEVOX_SPEAKER" "$RUNNER_TEMP/voicevox-speakers.json" "$RUNNER_TEMP/voicevox-version.json" <<'NODE'
+          const fs = require("fs");
+
+          const speakerId = Number(process.argv[2]);
+          const speakers = JSON.parse(fs.readFileSync(process.argv[3], "utf8"));
+          const version = JSON.parse(fs.readFileSync(process.argv[4], "utf8"));
+
+          let resolved = null;
+          for (const speaker of speakers) {
+            const style = (speaker.styles ?? []).find((item) => Number(item.id) === speakerId);
+            if (style) {
+              resolved = { speakerName: speaker.name, styleName: style.name };
+              break;
+            }
+          }
+
+          if (!resolved) {
+            throw new Error("VOICEVOX speaker/style id " + speakerId + " was not found");
+          }
+
+          const attribution = "VOICEVOX:" + resolved.speakerName;
+          fs.appendFileSync(process.env.GITHUB_ENV, "VOICEVOX_URL=http://127.0.0.1:50021\n");
+          fs.appendFileSync(process.env.GITHUB_ENV, "VOICEVOX_VERSION=" + version + "\n");
+          fs.appendFileSync(process.env.GITHUB_ENV, "VOICEVOX_ATTRIBUTION=" + attribution + "\n");
+
+          console.log("VOICEVOX " + version + ": " + resolved.speakerName + " / " + resolved.styleName + " (id=" + speakerId + ")");
+          console.log("Attribution: " + attribution);
+          NODE
+
       - name: Render production
         shell: bash
         run: npm run render -- "$PRODUCTION_ID"
+
+      - name: Stop VOICEVOX Engine
+        if: always() && steps.runtime.outputs.voicevox == 'true'
+        continue-on-error: true
+        shell: bash
+        run: docker rm -f voicevox-engine || true
 
       - name: Verify render output
         shell: bash
@@ -127,6 +219,11 @@ jobs:
             fi
           done
 
+          generated_dir="public/generated/$PRODUCTION_ID"
+          if [[ -d "$generated_dir" ]]; then
+            cp -R "$generated_dir" "$artifact_dir/generated-assets"
+          fi
+
           node - <<'NODE'
           const fs = require("fs");
           const path = require("path");
@@ -140,6 +237,8 @@ jobs:
             runNumber: process.env.GITHUB_RUN_NUMBER,
             actor: process.env.GITHUB_ACTOR,
             eventName: process.env.GITHUB_EVENT_NAME,
+            voicevoxVersion: process.env.VOICEVOX_VERSION ?? null,
+            voicevoxAttribution: process.env.VOICEVOX_ATTRIBUTION ?? null,
             createdAt: new Date().toISOString(),
           };
 
@@ -168,9 +267,13 @@ jobs:
             echo "- Production: \`$PRODUCTION_ID\`"
             echo "- Artifact: \`video-$PRODUCTION_ID-${{ github.run_number }}\`"
             echo "- Commit: \`${{ github.sha }}\`"
+            if [[ -n "${VOICEVOX_VERSION:-}" ]]; then
+              echo "- Narration: VOICEVOX \`${VOICEVOX_VERSION}\`"
+              echo "- Credit: \`${VOICEVOX_ATTRIBUTION}\`"
+            fi
             echo "- Run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             echo
-            echo "The artifact contains the MP4, render report, run metadata, and the production JSON used for the render."
+            echo "The artifact contains the MP4, render report, run metadata, production JSON, and generated narration assets used for the render."
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Report success to render issue
