@@ -76,6 +76,20 @@ for (const scene of storyboard.scenes) {
     });
     generated.push(asset);
     console.log(`asset: ${request.id} -> ${providerId} -> ${asset.uri}`);
+
+    if (request.capabilityId === "narration") {
+      const duration = Number(asset.metadata?.durationSeconds);
+      const target = Number(scene.durationSeconds);
+      if (Number.isFinite(duration) && Number.isFinite(target) && target > 0) {
+        const ratio = duration / target;
+        console.log(`narration timing: scene=${scene.id} audio=${duration.toFixed(2)}s target=${target.toFixed(2)}s fill=${(ratio * 100).toFixed(1)}%`);
+        if (ratio > 1) {
+          console.warn(`warning: narration for ${scene.id} exceeds its scene and will be clipped`);
+        } else if (ratio < 0.55) {
+          console.warn(`warning: narration for ${scene.id} fills less than 55% of its scene`);
+        }
+      }
+    }
   }
 }
 
